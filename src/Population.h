@@ -18,6 +18,8 @@ class Population {
     int n_items;               // total number of different objects in our data. 
     
 public:
+    Population();
+    Population(int n_items, int size);
     std::vector<Individual>& getPopulation() {return pop;}        ///Add const?
     int getSize() const {return pop.size();}
     int getN_items() const {return n_items;}

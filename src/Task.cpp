@@ -2,7 +2,16 @@
 
 using namespace std;
 
+Task::Task() { 
+    N = 0;
+    W = 0;
+    S = 0;
+    data = NULL;
+}
+
 void Task::show_data() {
+    std::cout << N << "\t" << W << "\t" << S << "\t" << std::endl;
+    std::cout << "--------------------" << std::endl;
     for(int i=0; i<N; i++)
         cout << data[i].w  << '\t' << data[i].s  << '\t' << data[i].c  << endl;
 
@@ -60,6 +69,8 @@ void Task::read(string fileName) {
     file.close();// Close the Fileº
     // Save the content as "data in use".
     N = stoi(dataList[0][0]);
+    W = stoi(dataList[0][1]);
+    S = stoi(dataList[0][2]);
     data = new Item[N];   // New data
     for(unsigned int i=1; i<dataList.size(); i++) {
         data[i-1].w = stoi(dataList[i][0]);
@@ -68,24 +79,33 @@ void Task::read(string fileName) {
     }
 }
 
-// Individual Task::geneticAlgorithm {
-//     //PSEUDOCODE
-//     // task = read(input_file)
-//     // pop = init_population(task.n_items, POP_SIZE)
-//     // i = 0
-//     // while i < ITERATIONS:
-//     // j = 0
-//     // new_pop = Population()
-//     // 8while j < POP_SIZE:
-//     // parent1 = tournament(pop)
-//     // parent2 = tournament(pop)
-//     // child = crossover(parent1, parent2, CROSSOVER_RATE)
-//     // mutate(child, MUTATION_RATE)
-//     // new_pop.add(child)
-//     // j += 1
-//     // pop = new_pop
-//     // i += 1
-//     // return pop.best()
-//     Individual solution = nullptr;
-//     return solution;
-// }
+Individual Task::geneticAlgorithm() {
+    Individual solution = NULL;
+    if(data == NULL) {
+        std::cout << "No data loaded. Please load data and try again." << endl;    
+    } else {
+        int POP_SIZE = 20;
+        int TOUR_SIZE = 20;
+        float CROSSOVER_RATE = 0.5;
+        float MUTATION_RATE = 0.5;
+        Population* P = new Population(N, POP_SIZE);
+        Population* newP;
+        bool continue == true;
+        while(continue) {
+            newP = new Population(N);           // Create a new population
+            p.evaluate();                       // Evaluate population.
+            for(int i=0; i<POP_SIZE; i++) {     // Produce a new population of childs of previous population.
+                Individual p1 = p.tournament(TOUR_SIZE);        // Selecting parents
+                Individual p2 = p.tournament(TOUR_SIZE);
+                Individal child = p.crossover(p1, p2, CROSSOVER_RATE); // Making the child combining the parents.
+                p.mutate(child, MUTATION_RATE);
+                newP.add_individual(child);     // Add individial to the new population
+            }
+            P = newP;
+            if(solution == bien)
+                continue = false;
+        }
+        std::cout << soulution << std::endl;
+    }
+        return solution;
+}

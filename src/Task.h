@@ -20,10 +20,9 @@ struct Item {
 class Task {
     int N, W, S;
     Item* data;
-    Population* P;
 
 public:
-    Task() { N = 0;}
+    Task();
     int getN() const { return N; }
     int getW() const { return W; }
     int getS() const { return S; }

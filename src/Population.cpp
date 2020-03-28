@@ -1,6 +1,14 @@
 #include "Population.h"
 using namespace std;
 
+Population::Population(int n_items) {
+    this->n_items = n_items;
+}
+
+Population::Population(int n_items, int size) {
+    init_population(n_items, size);
+}
+
 const Population& Population::init_population(int n_items, int size) {
     if(pop.size() > 0) //If there is a existing population I clear it.
         pop.clear();
@@ -24,6 +32,11 @@ void Population::show_population() {
     for(unsigned int i=0; i<pop.size(); i++){    
         show_individual(i);
     }
+}
+
+void Population::add_individual(Individual ind) {
+    pop.add(ind);
+    evs.add(-1);
 }
 
 void Population::show_individual(int n) {
