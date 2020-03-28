@@ -1,0 +1,8 @@
+Class for ReadCSV info taken here:
+    https://thispointer.com/how-to-read-data-from-a-csv-file-in-c/
+    
+I included boost to make the split of the lines easier using "boost::algorithm:split() function.
+    e.g.: "boost::algorithm::split(vec, line, boost::is_any_of(delimeter))"
+    To compile it you need to have Boost Library installed.
+        On Debian based systems: sudo apt-get install libboost-all-dev
+
