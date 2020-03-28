@@ -68,24 +68,24 @@ void Task::read(string fileName) {
     }
 }
 
-Individual Task::geneticAlgorithm {
-    //PSEUDOCODE
-    // task = read(input_file)
-    // pop = init_population(task.n_items, POP_SIZE)
-    // i = 0
-    // while i < ITERATIONS:
-    // j = 0
-    // new_pop = Population()
-    // 8while j < POP_SIZE:
-    // parent1 = tournament(pop)
-    // parent2 = tournament(pop)
-    // child = crossover(parent1, parent2, CROSSOVER_RATE)
-    // mutate(child, MUTATION_RATE)
-    // new_pop.add(child)
-    // j += 1
-    // pop = new_pop
-    // i += 1
-    // return pop.best()
-    Individual solution = nullptr;
-    return solution;
-}
+// Individual Task::geneticAlgorithm {
+//     //PSEUDOCODE
+//     // task = read(input_file)
+//     // pop = init_population(task.n_items, POP_SIZE)
+//     // i = 0
+//     // while i < ITERATIONS:
+//     // j = 0
+//     // new_pop = Population()
+//     // 8while j < POP_SIZE:
+//     // parent1 = tournament(pop)
+//     // parent2 = tournament(pop)
+//     // child = crossover(parent1, parent2, CROSSOVER_RATE)
+//     // mutate(child, MUTATION_RATE)
+//     // new_pop.add(child)
+//     // j += 1
+//     // pop = new_pop
+//     // i += 1
+//     // return pop.best()
+//     Individual solution = nullptr;
+//     return solution;
+// }

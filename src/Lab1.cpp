@@ -8,10 +8,10 @@ int main() {
     int W = 100; 
     int S = 100;
 
-    Task t;
-    t.generate(N,W,S,"data.csv");   // 1000 < n < 2000 | 10000 < w < 20000 | 10000 < s < 20000
-    t.read("data.csv");
-    t.show_data();
+    // Task t;
+    // t.generate(N,W,S,"data.csv");   // 1000 < n < 2000 | 10000 < w < 20000 | 10000 < s < 20000
+    // t.read("data.csv");
+    // t.show_data();
  
     // Population p;
     // p.init_population(N, 5);
