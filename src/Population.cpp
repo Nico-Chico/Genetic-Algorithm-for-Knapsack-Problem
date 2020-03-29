@@ -1,16 +1,20 @@
 #include "Population.h"
-using namespace std;
 
 Population::Population(int n_items) {
     this->n_items = n_items;
 }
 
 Population::Population(int n_items, int size) {
-    init_population(n_items, size);
+    initPopulation(n_items, size);
 }
 
-const Population& Population::init_population(int n_items, int size) {
-    if(pop.size() > 0) //If there is a existing population I clear it.
+void Population::addIndividual(Individual ind) {
+    pop.push_back(ind);
+    evs.push_back(-1);
+}
+
+const Population& Population::initPopulation(int n_items, int size) {
+    if(pop.size() > 0) // If there's an existing population, I clear it.
         pop.clear();
     srand(time(0));
     this->n_items=n_items;
@@ -28,25 +32,19 @@ const Population& Population::init_population(int n_items, int size) {
     return *this;
 }
 
-void Population::show_population() {
+void Population::showIndividual(int n) {
+    Individual p = pop[n];
+    for(int i=0; i<n_items; i++)
+        std::cout << p[i];
+    std::cout << "\t" << evs[n] << std::endl;
+}
+
+void Population::showPopulation() {
     for(unsigned int i=0; i<pop.size(); i++){    
-        show_individual(i);
+        showIndividual(i);
     }
 }
 
-void Population::add_individual(Individual ind) {
-    pop.add(ind);
-    evs.add(-1);
-}
-
-void Population::show_individual(int n) {
-    Individual p = pop[n];
-    for(int i=0; i<n_items; i++)
-        cout << p[i];
-    cout << "\t" << evs[n] << endl;
-}
-
-// Evaluate all individuals of the population according N, W and S given in Task t
 void Population::evaluate(Task* t) {
     Item* data = t->getData();
     int w_sum,s_sum,c_sum;

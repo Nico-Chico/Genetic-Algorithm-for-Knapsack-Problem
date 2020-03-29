@@ -9,10 +9,10 @@
 #include <string>
 #include "Population.h"
 
-class Population;
+class Population;           // Predeclaration of the class "Population" required.
 
-typedef bool* Individual;   // A bools array. Position i indicates if object 'i' of the dataset is present.
-
+typedef bool* Individual;   // A booleans array. Position i indicates
+                            // if object 'i' of the dataset is present.
 struct Item {
         int w, s, c;
     };
@@ -27,7 +27,7 @@ public:
     int getW() const { return W; }
     int getS() const { return S; }
     Item* getData() const { return data;}
-    void show_data();
+    void showData();
     void generate(int n, int w, int s, std::string output_file);
     void read(std::string fileName);
     Individual geneticAlgorithm();

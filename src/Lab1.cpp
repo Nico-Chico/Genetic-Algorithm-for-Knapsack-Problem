@@ -8,8 +8,8 @@ int main() {
     Task t;
     // t.generate(1000, 10000, 10000, "data.csv");   // 1000 < N < 2000 | 10000 < W < 20000 | 10000 < S < 20000
     t.read("data.csv");
-    t.show_data();
-    t.geneticAlgorithm();
+    t.showData();
+    // t.geneticAlgorithm();
 
     // Population p;
     // p.init_population(N, 5);
