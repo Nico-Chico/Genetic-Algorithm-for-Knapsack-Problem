@@ -8,7 +8,7 @@ The objective is to understand the behaviour and test the performance of the use
 
 ## How to compile the code. 🚀
 
-### Pre-requisites: 📋
+### Pre-requisites:
 I use `boost::algorithm:split()` to parser lines of *CSV files* easier. So you may need to **install boost library**:
 
 *On Debian GNU/Linux based systems:*
@@ -39,11 +39,11 @@ g++  -o "bin/Lab1" "obj/Lab1.o" "obj/Population.o" "obj/Task.o"
 <!--
 ## Testing our Genetic Algorithm 👨‍🔬️ ⚙️
 
-_Explica como ejecutar las pruebas automatizadas para este sistema_
+
 
 ### Analysis of tests 🔩
 
-_Explica que verifican estas pruebas y por qué_
+
 
 ```
 Da un ejemplo
@@ -56,17 +56,12 @@ Da un ejemplo
 
 * **Nicolás Magro Cruzado** | [GitLab](https://gitlab.com/Nico_Chico)
 
-También puedes mirar la lista de todos los [contribuyentes](https://github.com/your/project/contributors) quíenes han participado en este proyecto. 
 
 
-## Conclusiones 🎁
+## Conclusiones 
 
-* Comenta a otros sobre este proyecto 📢
-* Invita una cerveza 🍺 o un café ☕ a alguien del equipo. 
-* Da las gracias públicamente 🤓.
-* etc.
 
 
 -->
 ---
-⌨️ ✒️ Project by: **Nicolás Magro Cruzado** | [GitLab](https://gitlab.com/Nico_Chico)
+ Project by: **Nicolás Magro Cruzado** | [GitLab](https://gitlab.com/Nico_Chico) ⌨️
