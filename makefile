@@ -1,4 +1,4 @@
-bin/OUTPUT: obj/Population.o obj/Task.o obj/Lab1.o
+bin/Lab1: obj/Population.o obj/Task.o obj/Lab1.o
 	g++ -o bin/Lab1 obj/Lab1.o obj/Population.o obj/Task.o
 	
 obj/Population.o: src/Population.cpp src/Population.h

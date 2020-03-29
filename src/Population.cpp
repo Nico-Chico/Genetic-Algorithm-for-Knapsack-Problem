@@ -16,7 +16,6 @@ void Population::addIndividual(Individual ind) {
 const Population& Population::initPopulation(int n_items, int size) {
     if(pop.size() > 0) // If there's an existing population, I clear it.
         pop.clear();
-    srand(time(0));
     this->n_items=n_items;
     for(int i=0; i<size; i++)
         evs.push_back(0);
@@ -39,6 +38,12 @@ void Population::showIndividual(int n) {
     std::cout << "\t" << evs[n] << std::endl;
 }
 
+void Population::showIndividual(const Individual ind) {
+    for(int i=0; i<n_items; i++)
+        std::cout << ind[i];
+    std::cout << std::endl;
+}
+
 void Population::showPopulation() {
     for(unsigned int i=0; i<pop.size(); i++){    
         showIndividual(i);
@@ -52,12 +57,12 @@ void Population::evaluate(Task* t) {
         w_sum = 0; s_sum = 0; c_sum = 0;
         int j=0;
         bool valid = true;
+        Individual indiv = pop[i];
         while(j<n_items && valid){
-            bool* indiv = pop.at(i);
-            if(indiv[i] == true){
-                w_sum = w_sum + data[i].w;
-                s_sum = s_sum + data[i].s;
-                c_sum = c_sum + data[i].c;
+            if(indiv[j] == true){
+                w_sum += data[j].w;
+                s_sum += data[j].s;
+                c_sum += data[j].c;
             }
             if(w_sum > t->getW() || s_sum > t->getS()){
                 evs[i] = 0;
@@ -65,30 +70,57 @@ void Population::evaluate(Task* t) {
             }
             j++;
         }
+        if(valid)
+            evs[i] = c_sum; 
     }
 }
 
-// 
 Individual Population::tournament(int tour_size) {
-    srand(time(0));
-    Individual best_indiv = nullptr;
-    int best_fit = 0;
     int rnd;
-    for(int i = 0; i<tour_size; i++) {        //Select k of the individuals to player the tournament.
+    std::vector<Individual> tour_parts;
+    std::vector<int> tour_evs;
+    Individual best_ind;
+    int best_fit = 0;
+
+    for(int i=0; i<tour_size; i++){     // Select k individuals to play the tournament.
         rnd = random() % pop.size();
-        if(evs.at(rnd) > best_fit) {
-            best_fit = evs.at(rnd);
-            best_indiv = pop.at(rnd);        
+        tour_parts.push_back(pop.at(rnd));
+        tour_evs.push_back(evs.at(rnd));
+    }
+
+    for(unsigned int i=0; i<tour_evs.size(); i++) {
+        if(tour_evs[i] > best_fit) {
+            best_fit = tour_evs[i];
+            best_ind = tour_parts[i];
         }
     }
-    return best_indiv;
+    // std::cout << "- Tournament winner fitness:" << best_fit << std::endl;        // For testing only
+    return best_ind;
+    
+    
+    // int fitness_sum = std::accumulate(evs.begin(), evs.end(), 0);
+    // float rnd;
+    // for(int i = 0; i<tour_size; i++) {        //Select k of the individuals to player the tournament.
+    //     rnd = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);    // Random float [0.0, 1.0]
+    //     int j = 0;
+    //     while(j<pop.size()) {
+    //         if(0 < rnd < evs.at(j)/)
+    //     
+    //         j++;    
+    //     }
+    //     
+    //     
+    //     if(evs.at(rnd) > best_fit) {
+    //         best_fit = evs.at(rnd);
+    //         best_indiv = pop.at(rnd);        
+    //     }
+    // }
 }
 
 //
-Individual Population::crossover(const Individual& parent1, const Individual& parent2, float crossover_rate) {
-    srand(time(0));
+Individual Population::crossover(const Individual parent1, const Individual parent2, float crossover_rate) {
     float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);    // Random float [0.0, 1.0]
-    if(r > 0.5){
+    if(r > crossover_rate){
         Individual child = new bool[n_items];
         int c = rand() % n_items;
         for(int i=0; i<c; i++)

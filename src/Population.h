@@ -2,10 +2,7 @@
 #define POPULATION_H
 
 #include <iostream>
-#include <fstream>
 #include <vector>
-#include <string>
-#include <boost/algorithm/string.hpp>
 #include "Task.h"
 
 class Task;                 // Predeclaration of the class Task required.
@@ -34,12 +31,13 @@ public:
     void addIndividual(Individual ind);
     const Population& initPopulation(int n_items, int size);
     void showIndividual(int n);
+    void showIndividual(const Individual n);
     void showPopulation();
     
     // Evaluate all individuals of the population according N, W and S given in Task t
     void evaluate(Task* t);
     Individual tournament(int size);    // Selection method;
-    Individual crossover(const Individual& parent1, const Individual& parent2, float crossover_rate);
+    Individual crossover(const Individual parent1, const Individual parent2, float crossover_rate);
     void mutate(Individual individual, float mutation_rate);
 };
 

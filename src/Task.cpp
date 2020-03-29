@@ -23,16 +23,16 @@ void Task::showData() {
     // cout << w_sum << s_sum <<endl;
 }
 
+/// !!Change to 2*w to 10*w. Init does not work well with 10 factor.
 // Generate random data. For now dont load it as "data in use" (data atributte). For it use read();
 void Task::generate(int n, int w, int s, std::string output_file) {
-    srand(time(0));                              // Set rand seed.
     std::ofstream out_file;
     out_file.open(output_file);
     out_file << n  << ", " << w  << ", " << s  << std::endl; //Write the line in the file
     int w_i, s_i, c_i;
     for(int i=0; i<n; i++) {
-        w_i = (rand() % (10*w/n - 1) + 1);   // w_i  |  0 < w_i < 10*w/n
-        s_i = (rand() % (10*s/n - 1) + 1);   // s_i  |  0 < s_i < 10*s/n
+        w_i = (rand() % (2*w/n - 1) + 1);   // w_i  |  0 < w_i < 10*w/n
+        s_i = (rand() % (2*s/n - 1) + 1);   // s_i  |  0 < s_i < 10*s/n
         c_i = (rand() % (n - 1) + 1);        // c_i  |  0 < c_i < n
         out_file << w_i  << ", " << s_i  << ", " << c_i  << std::endl; //Write the line in the file
     }
@@ -77,34 +77,106 @@ void Task::read(std::string fileName) {
     }
 }
 
-Individual Task::geneticAlgorithm() {
+
+
+
+
+Individual Task::geneticAlgorithm(int POP_SIZE, int TOUR_SIZE, int CROSSOVER_RATE, int MUTATION_RATE) {
     Individual solution = NULL;
     if(data == NULL) {
-        std::cout << "No data loaded. Please load data and try again." << std::endl;
-    } else {
-        int POP_SIZE = 20;
-        int TOUR_SIZE = 20;
-        float CROSSOVER_RATE = 0.5;
-        float MUTATION_RATE = 0.5;
-        Population P(N, POP_SIZE);
-        Population newP(N);
-        // bool cont = true;
-        int iterations = 0;
-        // while(iterations < 10) {
-        //     newP = new Population(N);           // Create a new population
-        //     P.evaluate();                       // Evaluate population.
-        //     for(int i=0; i<POP_SIZE; i++) {     // Produce a new population of childs of previous population.
-        //         Individual p1 = P.tournament(TOUR_SIZE);        // Selecting parents
-        //         Individual p2 = P.tournament(TOUR_SIZE);
-        //         Individal child = P.crossover(p1, p2, CROSSOVER_RATE); // Making the child combining the parents.
-        //         P.mutate(child, MUTATION_RATE);
-        //         newP.add_individual(child);     // Add individial to the new population
-        //     }
-        //     P = newP;
-        //     // if(solution == true)
-        //     //     continue = false;
-        // }
-        std::cout << solution << std::endl;
+        std::cout << "> No data loaded. Please load data and try again." << std::endl;
+    } else {   
+        int ITERATIONS_NUMBER = 80;
+        Population* P = new Population(N, POP_SIZE);
+        std::cout << std::endl;
+        Population* newP;
+        int its = 0;
+        while(its < ITERATIONS_NUMBER) {
+            newP = new Population(N);           // Create a new (next generation) population 
+            P->evaluate(this);                      // Evaluate current population.
+            std::cout << std::endl << "> "<< its << " iteration: " << std::endl;
+            // std::cout << std::endl << "Population: " << std::endl;
+            P-> showPopulation();
+            std::cout << std::endl;
+            for(int i=0; i<POP_SIZE; i++) {     // Produce a new population of offsprings of previous population.
+                Individual p1 = P->tournament(TOUR_SIZE); // Selecting parents
+                Individual p2 = P->tournament(TOUR_SIZE);
+                Individual offspring = P->crossover(p1, p2, CROSSOVER_RATE); // Making the child combining the parents.
+                P->mutate(offspring, MUTATION_RATE);
+                // std::cout << std::endl << ">> Element " << i <<" of new population:" << std::endl;
+                // std::cout << "  > Parents: " << std::endl;
+                // P->showIndividual(p1);
+                // P->showIndividual(p2);
+                // std::cout << "  > New Offspring: " << std::endl;
+                // P->showIndividual(offspring);
+                newP->addIndividual(offspring);     // Add individial to the new population
+            }
+            P = newP;
+            // if(solution == true)         // I will changue iterator for a condition.
+            //     continue = false;
+            its++;
+        }
+        std::cout << std::endl << "> Final population:  " << std::endl;
+        P->evaluate(this);
+        P->showPopulation();
+        
+        // solution = P->selectBest();
+        // std::cout << solution << std::endl;
     }
-        return solution;
+        return solution; 
+}
+
+
+Individual Task::bruteForceAlgorithm() {
+    Individual solution = new bool[N];
+    
+    //Init solution to all 0
+    for(int i=0; i<N; i++) 
+            solution[i] = 0; 
+        
+    if(data == NULL) {
+        std::cout << "> No data loaded. Please load data and try again." << std::endl;
+    } else {
+        std::vector<float> quality;
+        
+        for(int i=0; i<N; i++) {
+            float q = data[i].c / (data[i].w + data[i].s);
+            quality.push_back(q);
+        }
+        
+        int w_sum = 0;
+        int s_sum = 0;
+        int c_sum = 0;
+
+        bool cont = true;
+        
+        while(cont) {
+            float best_quality = 0;
+            int best_i = 0;
+            for(unsigned int i=0; i<quality.size(); i++) {
+                if(quality[i] > best_quality) {
+                    best_quality = quality[i];
+                    best_i = i;                    
+                }
+            }
+            // Add the best to the solution.
+            if((w_sum + data[best_i].w) <= W && (s_sum + data[best_i].s) <= S) {
+                w_sum += data[best_i].w;
+                s_sum += data[best_i].s;
+                c_sum += data[best_i].c;
+                solution[best_i] = true;
+                quality[best_i] = 0;
+            } else {cont = false;}
+        }
+        
+        std::cout << "Estimated solution: " << std::endl;
+        for(int i=0; i<N; i++) {
+            std::cout << solution[i]; 
+        }
+        std::cout << std::endl;
+        std::cout << "Weight: " << w_sum << std::endl;
+        std::cout << "Size: " << s_sum << std::endl;
+        std::cout << "Value: " << c_sum << std::endl;
+    }
+    return solution;
 }

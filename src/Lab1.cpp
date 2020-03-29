@@ -5,25 +5,21 @@ using namespace std;
 
 
 int main() {
+    srand(time(0));                       // Set a seed for random().
+    int POP_SIZE = 60;              // Size of the population that algorithm will use.
+    int TOUR_SIZE = POP_SIZE/16;     // nºindividuals of the population thats play one tournament. It used for Tournament Selection method. TOUR_SIZE must be <= POP_SIZE 
+    float CROSSOVER_RATE = 0.9;       // 
+    float MUTATION_RATE = 0.4;      //
+    
     Task t;
-    // t.generate(1000, 10000, 10000, "data.csv");   // 1000 < N < 2000 | 10000 < W < 20000 | 10000 < S < 20000
+    t.generate(POP_SIZE, 1000, 1000, "data.csv");   // 1000 < N < 2000 | 10000 < W < 20000 | 10000 < S < 20000
     t.read("data.csv");
+    std::cout << "\n ==== Data ====" << std::endl;
     t.showData();
-    // t.geneticAlgorithm();
+    
+    std::cout << "\n\n\n ==== Genetic Algorithm ====" << std::endl;
+    t.geneticAlgorithm(POP_SIZE, TOUR_SIZE, CROSSOVER_RATE, MUTATION_RATE);
 
-    // Population p;
-    // p.init_population(N, 5);
-    // p.show_population();
-    // vector<Individual>& pop = p.getPopulation();
-    // std::cout << pop.size() <<" "<< p.getSize() <<std::endl;
-    // pop.erase(pop.begin());
-    // std::cout << pop.size() <<" "<< p.getSize() <<std::endl;
-    // p.show_population();
-    // 
-    // p.mutate(pop.at(0), 0.1);
-    // cout << endl;
-    // p.show_population();
-    // cout << endl;
-    // pop.push_back(p.crossover(pop.at(0), pop.at(1), 0.7));
-    // p.show_population();
+    std::cout << "\n\n\n ==== Brute Force Algorithm ====" << std::endl;
+    t.bruteForceAlgorithm();
 }

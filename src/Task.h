@@ -6,10 +6,7 @@
 #include <vector>
 #include <string>
 #include <boost/algorithm/string.hpp>
-#include <string>
 #include "Population.h"
-
-class Population;           // Predeclaration of the class "Population" required.
 
 typedef bool* Individual;   // A booleans array. Position i indicates
                             // if object 'i' of the dataset is present.
@@ -30,7 +27,8 @@ public:
     void showData();
     void generate(int n, int w, int s, std::string output_file);
     void read(std::string fileName);
-    Individual geneticAlgorithm();
+    Individual geneticAlgorithm(int POP_SIZE, int TOUR_SIZE, int CROSSOVER_RATE, int MUTATION_RATE);
+    Individual bruteForceAlgorithm();
 };
 
 #endif
