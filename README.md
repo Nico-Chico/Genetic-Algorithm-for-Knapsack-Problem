@@ -36,7 +36,7 @@ g++  -o "bin/Lab1" "obj/Lab1.o" "obj/Population.o" "obj/Task.o"
 
 ---
 
-
+<!--
 ## Testing our Genetic Algorithm 👨‍🔬️ ⚙️
 
 _Explica como ejecutar las pruebas automatizadas para este sistema_
@@ -67,6 +67,6 @@ También puedes mirar la lista de todos los [contribuyentes](https://github.com/
 * etc.
 
 
-
+-->
 ---
 ⌨️ ✒️ Project by: **Nicolás Magro Cruzado** | [GitLab](https://gitlab.com/Nico_Chico)
