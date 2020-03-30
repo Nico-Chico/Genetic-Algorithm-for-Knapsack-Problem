@@ -22,9 +22,9 @@ const Population& Population::initPopulation(int n_items, int size) {
     for(int i=0; i<size; i++) {
         Individual p = new bool[n_items];
         for(int i=0; i<n_items; i++) {
-            if(rand() % 2 == 0)
-                p[i] = true;
-            else p[i] = false;
+            if(rand() % 10 < 2)     // probability to set '1' = 0.2
+                p[i] = true;        // "Lab1.pdf" document suggest 0.5 but its produce a 'initial population' individuals overloaded 
+            else p[i] = false;      // of weight and size and therefore there is too many 'Individuals' with fitness 0;
         }
         pop.push_back(p);
     }
@@ -87,6 +87,8 @@ Individual Population::tournament(int tour_size) {
         tour_parts.push_back(pop.at(rnd));
         tour_evs.push_back(evs.at(rnd));
     }
+    
+    best_ind = tour_parts.at(0);  // If there is no any better Individual, "tournament" will return the first participant.
 
     for(unsigned int i=0; i<tour_evs.size(); i++) {
         if(tour_evs[i] > best_fit) {
@@ -94,33 +96,13 @@ Individual Population::tournament(int tour_size) {
             best_ind = tour_parts[i];
         }
     }
-    // std::cout << "- Tournament winner fitness:" << best_fit << std::endl;        // For testing only
+    // std::cout << "- Tournament winner fitness: " << best_fit << std::endl;  // For testing        // For testing only
     return best_ind;
-    
-    
-    // int fitness_sum = std::accumulate(evs.begin(), evs.end(), 0);
-    // float rnd;
-    // for(int i = 0; i<tour_size; i++) {        //Select k of the individuals to player the tournament.
-    //     rnd = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);    // Random float [0.0, 1.0]
-    //     int j = 0;
-    //     while(j<pop.size()) {
-    //         if(0 < rnd < evs.at(j)/)
-    //     
-    //         j++;    
-    //     }
-    //     
-    //     
-    //     if(evs.at(rnd) > best_fit) {
-    //         best_fit = evs.at(rnd);
-    //         best_indiv = pop.at(rnd);        
-    //     }
-    // }
 }
 
-//
 Individual Population::crossover(const Individual parent1, const Individual parent2, float crossover_rate) {
     float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);    // Random float [0.0, 1.0]
-    if(r > crossover_rate){
+    if(r < crossover_rate){
         Individual child = new bool[n_items];
         int c = rand() % n_items;
         for(int i=0; i<c; i++)
@@ -131,11 +113,11 @@ Individual Population::crossover(const Individual parent1, const Individual pare
     } else return parent1;
 }
 
-// Mutate genes of the individual pass as parameter with mutation_rate given.
 void Population::mutate(Individual individual, float mutation_rate) {
     int muts = mutation_rate * n_items;
     for(int i=0; i<muts; i++) {
         int g = rand() % n_items;
+        // std::cout << i << " of" << muts << "mutations | gene: " << g << std::endl;
         if(individual[g])
             individual[g] = 0;
         else individual[g] = 1;

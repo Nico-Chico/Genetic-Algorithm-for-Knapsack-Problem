@@ -8,50 +8,36 @@ Task::Task() {
 }
 
 void Task::showData() {
-    std::cout << N << "\t" << W << "\t" << S << "\t" << std::endl;
+    std::cout << "N.º items: " << N << "    " << "Max. Weight: " << W << "    " << "Max. Size: " << S << "\t" << std::endl;
     std::cout << "--------------------" << std::endl;
     for(int i=0; i<N; i++)
         std::cout << data[i].w  << '\t' << data[i].s  << '\t' << data[i].c  << std::endl;
 
-    // // Checking  w_i & s_i SUMMATORY propierties. 
+    // // Checking  w_i & s_i SUMMATORY propierties (criteria). 
     // int w_sum = 0;
     // int s_sum = 0;
     // for(int i=0; i<pop.size(); i++) {
-    //     w_sum = w_sum + data[i].w;
-    //     s_sum = s_sum + data[i].s;
+    //     w_sum += data[i].w;
+    //     s_sum += data[i].s;
     // }
     // cout << w_sum << s_sum <<endl;
 }
 
-/// !!Change to 2*w to 10*w. Init does not work well with 10 factor.
-// Generate random data. For now dont load it as "data in use" (data atributte). For it use read();
+
 void Task::generate(int n, int w, int s, std::string output_file) {
     std::ofstream out_file;
     out_file.open(output_file);
     out_file << n  << ", " << w  << ", " << s  << std::endl; //Write the line in the file
     int w_i, s_i, c_i;
     for(int i=0; i<n; i++) {
-        w_i = (rand() % (2*w/n - 1) + 1);   // w_i  |  0 < w_i < 10*w/n
-        s_i = (rand() % (2*s/n - 1) + 1);   // s_i  |  0 < s_i < 10*s/n
-        c_i = (rand() % (n - 1) + 1);        // c_i  |  0 < c_i < n
+        w_i = (rand() % (10*w/n - 1) + 1);   // 1 <= w_i < 10*w/n
+        s_i = (rand() % (10*s/n - 1) + 1);   // 1 <= s_i < 10*s/n
+        c_i = (rand() % (n - 1) + 1);        // 1 <= c_i < n
         out_file << w_i  << ", " << s_i  << ", " << c_i  << std::endl; //Write the line in the file
     }
     out_file.close();
-
-    /*Another version that load the data generated as "data in use".*/
-    // srand(time(0));
-    // data = new int[n][3];
-    // ofstream out_file;
-    // out_file.open(output_file);
-    // out_file << n  << ", " << w  << ", " << s  << endl; //Write the line in the file
-    // for(int i=0; i<n; i++) {
-    //     data[i][0] = (rand() % (10*w/n - 1) + 1);   // w_i  |  0 < w_i < 10*w/n
-    //     data[i][1] = (rand() % (10*s/n - 1) + 1);   // s_i  |  0 < s_i < 10*s/n
-    //     data[i][2] = (rand() % (n - 1) + 1);        // c_i  |  0 < c_i < n
-    //     out_file << data[i][0]  << ", " << data[i][1]  << ", " << data[i][2]  << endl; //Write the line in the file
-    // }
-    // out_file.close();
 }
+
 
 void Task::read(std::string fileName) {
     std::string delimeter = ",";
@@ -64,8 +50,8 @@ void Task::read(std::string fileName) {
     boost::algorithm::split(vec, line, boost::is_any_of(delimeter));    //split a line by a delimiter and save it in a vector of strings 
     dataList.push_back(vec);
     }
-    file.close();// Close the Fileº
-    // Save the content as "data in use".
+    file.close();   // Close the Fileº
+    // Load the content as "data in use".
     N = stoi(dataList[0][0]);
     W = stoi(dataList[0][1]);
     S = stoi(dataList[0][2]);
@@ -77,16 +63,12 @@ void Task::read(std::string fileName) {
     }
 }
 
-
-
-
-
-Individual Task::geneticAlgorithm(int POP_SIZE, int TOUR_SIZE, int CROSSOVER_RATE, int MUTATION_RATE) {
+Individual Task::geneticAlgorithm(int POP_SIZE, int TOUR_SIZE, float CROSSOVER_RATE, float MUTATION_RATE) {
     Individual solution = NULL;
     if(data == NULL) {
         std::cout << "> No data loaded. Please load data and try again." << std::endl;
     } else {   
-        int ITERATIONS_NUMBER = 80;
+        int ITERATIONS_NUMBER = 10;
         Population* P = new Population(N, POP_SIZE);
         std::cout << std::endl;
         Population* newP;
@@ -126,46 +108,44 @@ Individual Task::geneticAlgorithm(int POP_SIZE, int TOUR_SIZE, int CROSSOVER_RAT
         return solution; 
 }
 
-
-Individual Task::bruteForceAlgorithm() {
-    Individual solution = new bool[N];
-    
-    //Init solution to all 0
-    for(int i=0; i<N; i++) 
-            solution[i] = 0; 
-        
+Individual Task::qualityEstimationAlgorithm() {
+    Individual solution;
     if(data == NULL) {
-        std::cout << "> No data loaded. Please load data and try again." << std::endl;
+        std::cout << ">>> No data loaded. Please load data and try again." << std::endl;
     } else {
+        //Init solution to all 0
+        solution = new bool[N];
+        for(int i=0; i<N; i++) 
+            solution[i] = 0; 
+
         std::vector<float> quality;
-        
+        // Calc qualities of each item from dataset;
         for(int i=0; i<N; i++) {
-            float q = data[i].c / (data[i].w + data[i].s);
+            float q = (float)data[i].c / (float)(data[i].w + data[i].s);
             quality.push_back(q);
         }
-        
+
         int w_sum = 0;
         int s_sum = 0;
         int c_sum = 0;
-
         bool cont = true;
-        
         while(cont) {
-            float best_quality = 0;
+            float best_quality = -1;
             int best_i = 0;
+            // Search the best quality item.
             for(unsigned int i=0; i<quality.size(); i++) {
                 if(quality[i] > best_quality) {
                     best_quality = quality[i];
                     best_i = i;                    
                 }
             }
-            // Add the best to the solution.
+            // If its fit add the best item to the solution. Else stop the algorithm.
             if((w_sum + data[best_i].w) <= W && (s_sum + data[best_i].s) <= S) {
                 w_sum += data[best_i].w;
                 s_sum += data[best_i].s;
                 c_sum += data[best_i].c;
                 solution[best_i] = true;
-                quality[best_i] = 0;
+                quality[best_i] = -1;
             } else {cont = false;}
         }
         
