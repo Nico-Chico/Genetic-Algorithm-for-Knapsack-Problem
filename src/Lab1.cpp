@@ -12,9 +12,9 @@ int main() {
     Task t;
 
     // Default Data generation parameters:
-    int N_ITEMS = 1000;  // 1000 < N < 2000
-    int MAX_W = 10000;   // 10000 < W < 20000
-    int MAX_S = 10000;   // 10000 < S < 20000
+    int N_ITEMS = 60;  // 1000 < N < 2000       //if N_items < 80; Individual lenght fit on console witdh. (More comfortable view.)
+    int MAX_W = 200;   // 10000 < W < 20000
+    int MAX_S = 200;   // 10000 < S < 20000
     
     // Default GA parameters:
     int POP_SIZE = 50;              // Size of the population that algorithm will use.
@@ -108,14 +108,26 @@ int main() {
                 break; 
             case 4: // Set Algorithm parameters
                 system("clear");
-                std::cout << "Setting new parameters for Genetic Algorithm" << std::endl;
-                std::cout << "New Population size: ";
+                std::cout << std::endl;
+                std::cout << std::endl;
+                std::cout << "        🧪🧬  𝔾𝕖𝕟𝕖𝕥𝕚𝕔 𝔸𝕝𝕘𝕠𝕣𝕚𝕥𝕙𝕞  𝚏𝚘𝚛 𝙺𝚗𝚊𝚙𝚜𝚊𝚌𝚔 𝙿𝚛𝚘𝚋𝚕𝚎𝚖 "  << std::endl;
+                std::cout << std::endl;
+                std::cout << " --- PARAMETERS -----------------------------------------" << std::endl;
+                std::cout << "    N.º items: " << N_ITEMS << "    " << "Max. Weight: " << MAX_W << "    " << "Max. Size: " << MAX_S << "\t" << std::endl;
+                std::cout << "    Data loaded: ";
+                t.getData() == NULL ? (std::cout  << "❌\n") : ((std::cout <<"✅ -> "<< filename << " \n"));
+                std::cout << "    Population size: " << POP_SIZE << "        Tournament size: " << TOUR_SIZE << std::endl;
+                std::cout << "    Crossover rate: " << CROSSOVER_RATE << "         Mutation rate: " << MUTATION_RATE << std::endl;
+                // std::cout << std::endl;
+                std::cout << " --------------------------------------------------------" << std::endl;
+                std::cout << "\n [ Setting new parameters for Genetic Algorithm ]" << std::endl;
+                std::cout << "\n New Population size: ";
                 std::cin >> POP_SIZE;
-                std::cout << "\nNew Tournament size: ";
+                std::cout << " New Tournament size: ";
                 std::cin >> TOUR_SIZE;
-                std::cout << "\nNew Crossover rate: ";
+                std::cout << " New Crossover rate: ";
                 std::cin >> CROSSOVER_RATE;
-                std::cout << "\nNew Mutation rate: ";
+                std::cout << " New Mutation rate: ";
                 std::cin >> MUTATION_RATE;
                 std::cout <<"  ⏎ To continue" << std::endl;
                 std::cin.ignore().get(); //Pause Command for Linux Terminal
