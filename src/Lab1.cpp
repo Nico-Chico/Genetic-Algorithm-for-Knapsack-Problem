@@ -125,9 +125,9 @@ int main() {
                 std::cin >> POP_SIZE;
                 std::cout << " New Tournament size: ";
                 std::cin >> TOUR_SIZE;
-                std::cout << " New Crossover rate: ";
+                std::cout << " New Crossover rate [0.0, 1.0]: ";
                 std::cin >> CROSSOVER_RATE;
-                std::cout << " New Mutation rate: ";
+                std::cout << " New Mutation rate [0.0, 1.0]: ";
                 std::cin >> MUTATION_RATE;
                 std::cout <<"  ⏎ To continue" << std::endl;
                 std::cin.ignore().get(); //Pause Command for Linux Terminal
