@@ -50,7 +50,7 @@ Shows a Main Menu that controls the program from the top.
 ![menu img](https://gitlab.com/Nico_Chico/Genetic-Algorithm-for-Knapsack-Problem/-/raw/master/others/menu_screenshot_cut.png)
 
 Menu is totally working on most Linux Terminal.
-On windows terminal unicode characters wont be shown properly. And you need to changue `system("clear")` for `system("cls")` function to compile it on Windows. Everything else should work exactly the same.
+On Windows Terminal unicode characters wont be shown properly. (CMD does not support yet.) And to compile it on Windows you will need to change `system("clear")` for `system("cls")` function.  Everything else should work exactly the same.
 From here you can change the parameters that the data generation or the genetic algorithm will use. can also change this parameters manualy on the main.cpp
 
 *More information is detailed in the source code comments.*
