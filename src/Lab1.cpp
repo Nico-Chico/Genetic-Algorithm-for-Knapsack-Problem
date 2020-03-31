@@ -42,45 +42,52 @@ int main() {
         // std::cout << std::endl;
         std::cout << " --------------------------------------------------------" << std::endl;
         std::cout << std::endl;
-        std::cout << "  1. 🔧\t| Set Task parameters" << std::endl;
-        std::cout << "  2. 📊\t| Generate dataset" << std::endl;
-        std::cout << "  3. 💾\t| Read dataset" << std::endl;
-        std::cout << "  4. 👀\t| Show dataset in use" << std::endl;
-        std::cout << "  5. ⚙️\t| Set Algorithm parameters" << std::endl;
-        std::cout << "  6. 🧬\t| Use 'Genetic Algorithm'" << std::endl;
-        // std::cout << "6. Use 'Quality Estimation Algorithm'" << std::endl;
-        // std::cout << "7. Compare both algorithms" << std::endl;
+        std::cout << "  1. 💾\t| Generate new dataset" << std::endl;
+        std::cout << "  2. 💿\t| Read dataset" << std::endl;
+        std::cout << "  3. 👀\t| Show dataset in use" << std::endl;
+        std::cout << "  4. ⚙️\t| Set Algorithm parameters" << std::endl;
+        std::cout << "  5. 🧬\t| Use 'Genetic Algorithm'" << std::endl;
         std::cout << "  0. 🡄\t| Exit" << std::endl;
         
-        std::cout << "\n > ";
+        std::cout << "\n\n > ";
         std::cin >> selection;
         switch(selection) {
             case 0:
                 stop = true;
                 break; 
-            case 1: // Set task parameters;
-                system("clear");
-                std::cout << "Setting new parameters for Task" << std::endl;
-                std::cout << "New N.º of items: ";
-                std::cin >> N_ITEMS;
-                std::cout << "\nNew Max. Weight of knapsack: ";
-                std::cin >> MAX_W;
-                std::cout << "\nNew Max. Weight of knapsack: ";
-                std::cin >> MAX_S;
-                break;
-            case 2:
-                system("clear");
-                std::cout << "Name for new dataset (write 0 for default): ";
+            case 1: 
+                system("clear"); // Set task parameters;
+                std::cout << std::endl;
+                std::cout << std::endl;
+                std::cout << "  === New Data Generation ===" << std::endl;
+                std::cout << std::endl;
+                std::cout << " --- PARAMETERS -----------------------------------------" << std::endl;
+                std::cout << "    N.º items: " << N_ITEMS << "    " << "Max. Weight: " << MAX_W << "    " << "Max. Size: " << MAX_S << "\t" << std::endl;
+                std::cout << "\n Do you want to change the parameters? [y, n] ";
+                char c;
+                cin >> c;
+                std::cout << std::endl;
+                if(c=='y') {
+                    std::cout << " [ Setting new parameters for Task ]" << std::endl;
+                    std::cout << " New N.º of items: ";
+                    std::cin >> N_ITEMS;
+                    std::cout << " New Max. Weight of knapsack: ";
+                    std::cin >> MAX_W;
+                    std::cout << " New Max. Weight of knapsack: ";
+                    std::cin >> MAX_S;                    
+                }
+                std::cout << std::endl;
+                std::cout << " Name for new dataset (write 0 for default): ";
                 std::cin >> filename;
                 if(filename == "0")
                     filename = "new_dataset.csv";   // Default name;
-                std::cout << "Generating dataset..." << std::endl;
+                std::cout << "\n Generating dataset..." << std::endl;
                 t.generate(N_ITEMS, MAX_W, MAX_S, "datasets/"+filename);
                 t.read("datasets/"+filename);
                 std::cout <<"'" << filename << "' dataset was generated using currents parameters and loaded.\n  ⏎ To continue" << std::endl;
                 std::cin.ignore().get(); //Pause Command for Linux Terminal
                 break;
-            case 3: // Read dataset
+            case 2: // Read dataset
                 system("clear");
                 std::cout << "Name of the dataset file (write 0 for default): ";
                 std::cin >> filename;
@@ -92,13 +99,14 @@ int main() {
                 std::cout <<"  ⏎ To continue" << std::endl;
                 std::cin.ignore().get(); //Pause Command for Linux Terminal
                 break;
-            case 4: // Show data
+            case 3: // Show data
                 system("clear");
+                std::cout << "\n ==== Showing Data ====" << std::endl;
                 t.showData();
                 std::cout <<"  ⏎ To continue" << std::endl;
                 std::cin.ignore().get(); //Pause Command for Linux Terminal
                 break; 
-            case 5: // Set Algorithm parameters
+            case 4: // Set Algorithm parameters
                 system("clear");
                 std::cout << "Setting new parameters for Genetic Algorithm" << std::endl;
                 std::cout << "New Population size: ";
@@ -112,7 +120,7 @@ int main() {
                 std::cout <<"  ⏎ To continue" << std::endl;
                 std::cin.ignore().get(); //Pause Command for Linux Terminal
                 break;
-            case 6:
+            case 5:
                 system("clear");
                 std::cout << "\n ==== Data ====" << std::endl;
                 t.showData();

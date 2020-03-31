@@ -7,6 +7,7 @@ Task::Task() {
     data = NULL;
 }
 
+
 void Task::showData() {
     if(data == NULL) {
         std::cout << "> No data loaded. Please load data and try again." << std::endl;
@@ -15,15 +16,6 @@ void Task::showData() {
         std::cout << "--------------------" << std::endl;
         for(int i=0; i<N; i++)
             std::cout << data[i].w  << '\t' << data[i].s  << '\t' << data[i].c  << std::endl;
-
-        // // Checking  w_i & s_i SUMMATORY propierties (criteria). 
-        // int w_sum = 0;
-        // int s_sum = 0;
-        // for(int i=0; i<pop.size(); i++) {
-        //     w_sum += data[i].w;
-        //     s_sum += data[i].s;
-        // }
-        // cout << w_sum << s_sum <<endl;
     }
 }
 
