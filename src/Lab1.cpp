@@ -56,7 +56,7 @@ int main() {
             case 0:
                 stop = true;
                 break; 
-            case 1:       // Set task parameters;
+            case 1: // Set task parameters;
                 system("clear");
                 std::cout << "Setting new parameters for Task" << std::endl;
                 std::cout << "New N.º of items: ";
