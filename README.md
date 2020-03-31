@@ -55,6 +55,30 @@ From here you can change the parameters that the data generation or the genetic 
 
 *More information is detailed in the source code comments.*
 
+## Some Documentation notes:
+
+*Please read first `Lab1.pdf'*
+
+### 1. Implementation of the task generator
+
+Knapsack problem `function generate(n, w, s, output_file)`
+Lab1.pdf sentence that the set of generated items meets the following criteria:
+![criteria img](https://gitlab.com/Nico_Chico/Genetic-Algorithm-for-Knapsack-Problem/-/raw/master/others/generation_criteria.png)
+
+I was confused here.
+**What is second criteria for? It's saying I have to program it? Or it's saying it's a property that's fulfilled?**
+
+I tried to make myself clear:
+Knowing that it is a random distribution, these sums are aproxmitly the  "mean × nº elements"
+· e.g for 'w'.
+Average (mean) hoped :   
+ (1 + (10×w/n) )/2 ≈ 5w/n
+∑wi ≈ (5w/n) × n = 5w ≫ 2w
+It will be satisfied in most of the cases. Because the range our random variables. 
+
+
+
+
 
 
 <!--
