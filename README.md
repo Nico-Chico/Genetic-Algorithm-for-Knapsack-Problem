@@ -4,10 +4,8 @@
 
 This is the first **laboratory work** of the **Introduction to Artificial Intelligence** 2020 course in the Computer Science program from **Politechnika Wrocławska**
 
-**Objective:**
-Getting familiar with Genetic Algorithms (GA) metaheuristics in practice through individual implementation.
+The objetive is getting familiar with Genetic Algorithms (GA) metaheuristics in practice through individual implementation. And test its performance solving the classical *Knapsack Problem*. 
 
-Understand the behaviour and test the performance of the use of Genetic Algorithms in the **optimization** of the *Knapsack Problem*. 
 The project has been entirely developed in C++ language.
 
 ## How to compile the code. 🚀
@@ -37,8 +35,6 @@ g++ -Wall -fexceptions -g -Iinclude -c "src/Task.cpp" -o "obj/Task.o"
 g++  -o "bin/Lab1" "obj/Lab1.o" "obj/Population.o" "obj/Task.o"
 ```
 
----
-
 ## Project Structure
 Basically, the code consists of two classes and main function:
 
@@ -48,7 +44,7 @@ This class is responsible of store individuals population and contains the metho
 ### Class Task:         `Task.h` & `Task.cpp`
 This class is responsible of save and manage the data and parameters from our currently problem.  
 
-###Main function:       `main.cpp`
+### Main function:       `main.cpp`
 Controls the program from the top.
 From here you can change the parameters that the data generation or the genetic algorithm will use.
 
