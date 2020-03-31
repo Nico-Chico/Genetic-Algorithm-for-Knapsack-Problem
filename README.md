@@ -1,10 +1,13 @@
+<!-- THIS FILE IS ON MARKDOWN FORMAT. PLEASE READ IT ON GITLAB REPO: "https://gitlab.com/Nico_Chico/Genetic-Algorithm-for-Knapsack-Problem"
+YOU CAN ALSO USE A PROPER .MD VISOR TO READ IT OR CONVERT TO PDF -->
+
 # Genetic Algorithm for Knapsack Problem
 
 *Laboratory 1, Introduction to Artificial Intelligence*
 
 This is the first **laboratory work** of the **Introduction to Artificial Intelligence** 2020 course in the Computer Science program from **Politechnika Wrocławska** University.
 
-The objetive is getting familiar with Genetic Algorithms (GA) metaheuristics in practice through individual implementation. And test its performance solving the classical *Knapsack Problem*. 
+The objective is getting familiar with Genetic Algorithms (GA) meta-heuristics in practice through individual implementation. And test its performance solving the classical *Knapsack Problem*. 
 
 The project has been entirely developed in C++ language.
 
@@ -71,7 +74,7 @@ I was confused here:
 Let's see. Knowing that it is a random distribution, these sums should be approximately "the mean × nº elements"
 · e.g for 'w'.
 
-Average (mean) hoped: μ.                μ ≈ (1 + (10×w/n) )/2 ≈ 5w/n    ➔    ∑wi ≈ (5w/n) × n = 5w ≫ 2w
+Average (mean) hoped: μ.            μ ≈ (1 + (10×w/n) )/2 ≈ 5w/n    ➔    ∑wi ≈ (5w/n) × n = 5w ≫ 2w
 
 Seeing this we realize that the second criteria is a property that will be met in the vast majority of cases. So we don't have to program anything to force the criteria to be met. 
 
@@ -88,7 +91,7 @@ Also, in case there is any doubt, I made tests, checking the value of these sums
 
 Si resulta que en una iteración se selecciona el mismo padre demasiado para la nueva publación. (Ya sea por un tamaño de población escaso o por un tamaño de torneo muy grande) la descendencia(next population) se estanca y sus individuos son demasiado parecidos.
 
-
+<
 
 -->
 ---
