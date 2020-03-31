@@ -41,10 +41,10 @@ public:
     // Read dataset from an ".csv" file and load it as currently for use;
     void read(std::string fileName);
     
-    //
+    // Use Genetic Algorihm to solve the task.
     Individual geneticAlgorithm(int POP_SIZE, int TOUR_SIZE, float CROSSOVER_RATE, float MUTATION_RATE);
     
-    //
+    // Use a qualityEstimationAlgorithm to solve the task.
     Individual qualityEstimationAlgorithm();
 };
 

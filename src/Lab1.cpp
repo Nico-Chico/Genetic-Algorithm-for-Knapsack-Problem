@@ -8,7 +8,7 @@
 using namespace std;
 
 int main() {
-    srand(111);                     // Set a seed for random().
+    srand(111);  // Set a seed for random(). | Set random(time(0)) for randomness
     Task t;
 
     // Default Data generation parameters:

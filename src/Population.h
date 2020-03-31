@@ -27,11 +27,11 @@ public:
     int getNitems() const {return n_items;}
     int getSize() const {return pop.size();}
     
-    // 
+    // Add Individial 'ind' to the population
     void addIndividual(Individual ind);
     
-    // 
-    const Population& initPopulation(int n_items, int size);
+    // Initialice the population randomly
+    const Population& initPopulation(int n_items, int size); // Nº of items, Size of population.
     
     // Show Individual on the position 'n';
     void showIndividual(int n);
@@ -45,8 +45,10 @@ public:
     // Evaluate all individuals of the population according N, W and S given in Task t
     void evaluate(Task* t);
     
+    // Select a Individual from populaton using Tournament Selection method.
     Individual tournament(int size);    // Selection method;
     
+    // Use crossover to create a Individual Offspring of two Parents passed as parameters.
     Individual crossover(const Individual parent1, const Individual parent2, float crossover_rate);
    
     // Mutate genes of the individual pass as parameter with mutation_rate given.
