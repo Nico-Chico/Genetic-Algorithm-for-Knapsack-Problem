@@ -12,15 +12,15 @@ int main() {
     Task t;
 
     // Default Data generation parameters:
-    int N_ITEMS = 60;  // 1000 < N < 2000
+    int N_ITEMS = 1000;  // 1000 < N < 2000
     int MAX_W = 10000;   // 10000 < W < 20000
     int MAX_S = 10000;   // 10000 < S < 20000
     
     // Default GA parameters:
-    int POP_SIZE = 40;              // Size of the population that algorithm will use.
+    int POP_SIZE = 50;              // Size of the population that algorithm will use.
     int TOUR_SIZE = 20;              // nºindividuals of the population thats play one tournament. It used for Tournament Selection method. TOUR_SIZE must be <= POP_SIZE 
     float CROSSOVER_RATE = 0.7;      // Between [0, 1]; Probability of make a crossover takes effect.
-    float MUTATION_RATE = 4/60;       // n_items * MUTATION_RATE = nº of genes that mutes from one individual.
+    float MUTATION_RATE = 4/50;       // n_items * MUTATION_RATE = nº of genes that mutes from one individual.
     
     
     //// MENU ////
@@ -30,16 +30,18 @@ int main() {
     while(!stop) {
         system("clear");
         std::cout << std::endl;
+        std::cout << std::endl;
         std::cout << "        🧪🧬  𝔾𝕖𝕟𝕖𝕥𝕚𝕔 𝔸𝕝𝕘𝕠𝕣𝕚𝕥𝕙𝕞  𝚏𝚘𝚛 𝙺𝚗𝚊𝚙𝚜𝚊𝚌𝚔 𝙿𝚛𝚘𝚋𝚕𝚎𝚖 "  << std::endl;
         std::cout << std::endl;
-        std::cout << " ---  PARAMETERS -------------------------------" << std::endl;
+        std::cout << " --- PARAMETERS -----------------------------------------" << std::endl;
         std::cout << "    N.º items: " << N_ITEMS << "    " << "Max. Weight: " << MAX_W << "    " << "Max. Size: " << MAX_S << "\t" << std::endl;
         std::cout << "    Data loaded: ";
         t.getData() == NULL ? (std::cout  << "❌\n") : ((std::cout <<"✅ -> "<< filename << " \n"));
         std::cout << "    Population size: " << POP_SIZE << "        Tournament size: " << TOUR_SIZE << std::endl;
         std::cout << "    Crossover rate: " << CROSSOVER_RATE << "         Mutation rate: " << MUTATION_RATE << std::endl;
         // std::cout << std::endl;
-        std::cout << " -----------------------------------" << std::endl;
+        std::cout << " --------------------------------------------------------" << std::endl;
+        std::cout << std::endl;
         std::cout << "  1. 🔧\t| Set Task parameters" << std::endl;
         std::cout << "  2. 📊\t| Generate dataset" << std::endl;
         std::cout << "  3. 💾\t| Read dataset" << std::endl;

@@ -45,8 +45,33 @@ This class is responsible of store individuals population and contains the metho
 This class is responsible of save and manage the data and parameters from our currently problem.  
 
 ### Main function:       `main.cpp`
-Controls the program from the top.
-From here you can change the parameters that the data generation or the genetic algorithm will use.
+Shows a Main Menu that controls the program from the top.
+```plain
+  
+        🧪🧬  𝔾𝕖𝕟𝕖𝕥𝕚𝕔 𝔸𝕝𝕘𝕠𝕣𝕚𝕥𝕙𝕞  𝚏𝚘𝚛 𝙺𝚗𝚊𝚙𝚜𝚊𝚌𝚔 𝙿𝚛𝚘𝚋𝚕𝚎𝚖 
+  
+ --- PARAMETERS -----------------------------------------
+    N.º items: 1000    Max. Weight: 10000    Max. Size: 10000	
+    Data loaded: ❌
+    Population size: 50        Tournament size: 20
+    Crossover rate: 0.7         Mutation rate: 0
+ --------------------------------------------------------
+  
+  1. 🔧	| Set Task parameters
+  2. 📊	| Generate dataset
+  3. 💾	| Read dataset
+  4. 👀	| Show dataset in use
+  5. ⚙️	| Set Algorithm parameters
+  6. 🧬	| Use 'Genetic Algorithm'
+  0. 🡄	| Exit
+  
+ >   
+  
+```
+
+From here you can change the parameters that the data generation or the genetic algorithm will use. can also change this parameters manualy on the main.cpp
+
+*More information is detailed in the source code comments.*
 
 *More information is detailed in the source code comments.*
 
