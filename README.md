@@ -2,7 +2,7 @@
 
 *Laboratory 1, Introduction to Artificial Intelligence*
 
-This is the first **laboratory work** of the **Introduction to Artificial Intelligence** 2020 course in the Computer Science program from **Politechnika Wrocławska**
+This is the first **laboratory work** of the **Introduction to Artificial Intelligence** 2020 course in the Computer Science program from **Politechnika Wrocławska** University.
 
 The objetive is getting familiar with Genetic Algorithms (GA) metaheuristics in practice through individual implementation. And test its performance solving the classical *Knapsack Problem*. 
 
@@ -61,23 +61,17 @@ From here you can change the parameters that the data generation or the genetic 
 
 ### 1. Criteria Aclaration on Implementation of the task generator
 
-Knapsack problem `function generate(n, w, s, output_file)`
-Lab1.pdf sentence that the set of generated items meets the following criteria:
+On Knapsack problem `function generate(n, w, s, output_file)`.
+**Lab1.pdf sentence** that the set of generated items **meets the following criteria:**
 ![criteria img](https://gitlab.com/Nico_Chico/Genetic-Algorithm-for-Knapsack-Problem/-/raw/master/others/generation_criteria.png)
 
 I was confused here:
 **What is second criteria for? It's saying I have to program it? Or it's saying it's a property that's fulfilled?**
 
-
-
 Let's see. Knowing that it is a random distribution, these sums should be approximately "the mean × nº elements"
 · e.g for 'w'.
 
-Average (mean) hoped:   
-
- (1 + (10×w/n) )/2 ≈ 5w/n
- 
-∑wi ≈ (5w/n) × n = 5w ≫ 2w
+Average (mean) hoped: μ.                μ ≈ (1 + (10×w/n) )/2 ≈ 5w/n    ➔    ∑wi ≈ (5w/n) × n = 5w ≫ 2w
 
 Seeing this we realize that the second criteria is a property that will be met in the vast majority of cases. So we don't have to program anything to force the criteria to be met. 
 
