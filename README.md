@@ -11,7 +11,7 @@ The objective is getting familiar with Genetic Algorithms (GA) meta-heuristics i
 
 The project has been entirely developed in C++ language.
 
-## How to compile the code. 🚀
+## How to compile the code
 
 ### Pre-requisites:
 I use `boost::algorithm:split()` to parser lines of *CSV files* easier. So you may need to **install boost library**:
@@ -23,6 +23,8 @@ sudo apt-get install libboost-all-dev
 ```
 
 ### To compile it simply run:
+
+*Make sure you have created the 'bin/' and 'obj/' directories*
 
 ```bash
 make
@@ -36,6 +38,7 @@ g++ -Wall -fexceptions -g -Iinclude -c "src/Lab1.cpp" -o "obj/Lab1.o"
 g++ -Wall -fexceptions -g -Iinclude -c "src/Population.cpp" -o "obj/Population.o"
 g++ -Wall -fexceptions -g -Iinclude -c "src/Task.cpp" -o "obj/Task.o"
 g++  -o "bin/Lab1" "obj/Lab1.o" "obj/Population.o" "obj/Task.o"
+g++  -o "bin/Lab1exp" "obj/Lab1exp.o" "obj/Population.o" "obj/Task.o"
 ```
 
 ## Project Structure
@@ -47,7 +50,7 @@ This class is responsible of store individuals population and contains the metho
 ### Class Task:         `Task.h` & `Task.cpp`
 This class is responsible of save and manage the data and parameters from our currently problem.  
 
-### Main function:       `main.cpp`
+### Main Menu :       `Lab1.cpp`
 Shows a Main Menu that controls the program from the top.
 
 ![menu img](https://gitlab.com/Nico_Chico/Genetic-Algorithm-for-Knapsack-Problem/-/raw/master/others/menu_screenshot_cut.png)
@@ -55,6 +58,29 @@ Shows a Main Menu that controls the program from the top.
 Menu is totally working on most Linux Terminal.
 On Windows Terminal unicode characters wont be shown properly. (CMD does not support yet.) And to compile it on Windows you will need to change `system("clear")` for `system("cls")` function.  Everything else should work exactly the same.
 From here you can change the parameters that the data generation or the genetic algorithm will use. can also change this parameters manualy on the main.cpp
+
+## Experiment Mode
+Additionally you can indicate an already programmed experiment by passing its name by parameter.
+
+To create an experiment:
+1. First create a folder called 'expID' in the 'experiments/'' directory.    (Where 'ID' its a number to identify a experiment)
+2. Then inside the created folder, create a file with the name 'expID' + 'txt'. 
+3. That file must contain 7 lines, where each line corresponds to one of the parameters in this order: 
+
+"N_ITEMS, MAX_W, MAX_S, POP_SIZE, TOUR_SIZE, CROSSOVER_RATE, MUTATION_RATE"
+
+Executing experiment 'exp01':
+```bash
+bin/Lab1 exp01
+```
+### Experiments only program:       `Lab1exp.cpp`
+
+The 'Lab1exp' program contains only what is necessary for the experimental mode to work, eliminating the whole menu for easier compilation.
+
+Executing experiment 'exp01':
+```bash
+bin/Lab1exp exp01
+```
 
 *More information is detailed in the source code comments.*
 
