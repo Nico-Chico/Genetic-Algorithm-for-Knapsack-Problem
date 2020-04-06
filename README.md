@@ -66,8 +66,9 @@ To create an experiment:
 1. First create a folder called 'expID' in the 'experiments/'' directory.    (Where 'ID' its a number to identify a experiment)
 2. Then inside the created folder, create a file with the name 'expID' + 'txt'. 
 3. That file must contain 7 lines, where each line corresponds to one of the parameters in this order: 
+*"N_ITEMS, MAX_W, MAX_S, POP_SIZE, TOUR_SIZE, CROSSOVER_RATE, MUTATION_RATE"*
 
-"N_ITEMS, MAX_W, MAX_S, POP_SIZE, TOUR_SIZE, CROSSOVER_RATE, MUTATION_RATE"
+*See 'experiments/exp01.txt' to understand it better.*
 
 Executing experiment 'exp01':
 ```bash
