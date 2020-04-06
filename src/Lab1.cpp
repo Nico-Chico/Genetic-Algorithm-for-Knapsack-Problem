@@ -160,7 +160,7 @@ int main(int argc, char** argv) {
             }
         }
         
-    } else if(argc > 1 ) {// EXPERIMENT MODE
+    } else if(argc > 1 ) {							// EXPERIMENT MODE
         std::cout << "Exp mode. Loading experiment: '" << argv[1]  <<"'"<< endl;
         
         string expID= argv[1];
@@ -193,11 +193,10 @@ int main(int argc, char** argv) {
             getline(file, line);
             MUTATION_RATE = stof(line);
             
-            getline(file, line);
-            std::string filename = line;
-            
             // Reading data from datafile specified from input 8º line
-            t.read(path+filename);     
+            string filename = path + expID + "-dataset.csv";
+            t.generate(N_ITEMS, MAX_W, MAX_S, filename);
+            t.read(filename);
      
             //  Show loaded parameters   
             std::cout << std::endl;            
@@ -211,45 +210,27 @@ int main(int argc, char** argv) {
             std::cout << "    Crossover rate: " << CROSSOVER_RATE << "         Mutation rate: " << MUTATION_RATE << std::endl;
             // std::cout << std::endl;
             std::cout << " --------------------------------------------------------" << std::endl;
+        
+            std::cout << "\n ==== Data ====" << std::endl;
+            t.showData();
+            
+             // Genetic Algorithm
+            std::cout << "\n\n\n ==== Genetic Algorithm ====" << std::endl;
+            auto t1_g = std::chrono::high_resolution_clock::now();
+            t.geneticAlgorithm(POP_SIZE, TOUR_SIZE, CROSSOVER_RATE, MUTATION_RATE);
+            auto t2_g = std::chrono::high_resolution_clock::now();
+            auto duration_g = std::chrono::duration_cast<std::chrono::microseconds>( t2_g - t1_g ).count();
+
+            // Quality Estimation Algorithm
+            auto t1_q = std::chrono::high_resolution_clock::now();
+            std::cout << "\n\n\n ==== Quality estimation Algorithm ====" << std::endl;
+            t.qualityEstimationAlgorithm();
+            auto t2_q = std::chrono::high_resolution_clock::now();
+            auto duration_q = std::chrono::duration_cast<std::chrono::microseconds>( t2_q - t1_q ).count();
+
+            std::cout << std::endl << " ==== Times: ====" << std::endl;
+            std::cout << "  Genetic Algorithm runtime:\t\t" << duration_g << " μs"  << std::endl;
+            std::cout << "  Quality Estimation Algorithm runtime:\t"  << duration_q << " μs" << std::endl;
         }
     }
-    
-   
-        
-    /* FOR TESTING */
-
-    // // Data generation parameters:
-    // int N_ITEMS = 60;  // 1000 < N < 2000
-    // int MAX_W = 10000;   // 10000 < W < 20000
-    // int MAX_S = 10000;   // 10000 < S < 20000
-    // t.generate(N_ITEMS, MAX_W, MAX_S, "data.csv");
-    // 
-    // // Reading data
-    // t.read("data.csv");
-    // std::cout << "\n ==== Data ====" << std::endl;
-    // t.showData();
-
-    // // GA parameters:
-    // int POP_SIZE = 100;              // Size of the population that algorithm will use.
-    // int TOUR_SIZE = 30;              // nºindividuals of the population thats play one tournament. It used for Tournament Selection method. TOUR_SIZE must be <= POP_SIZE 
-    // float CROSSOVER_RATE = 0.1;      // Between [0, 1]; Probability of make a crossover takes effect.
-    // float MUTATION_RATE = 10/40;       // n_items * MUTATION_RATE = nº of genes that mutes from one individual.
-    // 
-    // // Genetic Algorithm
-    // std::cout << "\n\n\n ==== Genetic Algorithm ====" << std::endl;
-    // auto t1_g = std::chrono::high_resolution_clock::now();
-    // t.geneticAlgorithm(POP_SIZE, TOUR_SIZE, CROSSOVER_RATE, MUTATION_RATE);
-    // auto t2_g = std::chrono::high_resolution_clock::now();
-    // auto duration_g = std::chrono::duration_cast<std::chrono::microseconds>( t2_g - t1_g ).count();
-
-    // // Quality Estimation Algorithm
-    // auto t1_q = std::chrono::high_resolution_clock::now();
-    // std::cout << "\n\n\n ==== Quality estimation Algorithm ====" << std::endl;
-    // t.qualityEstimationAlgorithm();
-    // auto t2_q = std::chrono::high_resolution_clock::now();
-    // auto duration_q = std::chrono::duration_cast<std::chrono::microseconds>( t2_q - t1_q ).count();
-
-    // std::cout << std::endl << " ==== Times: ====" << std::endl;
-    // std::cout << "  Genetic Algorithm runtime:\t\t" << duration_g << " μs"  << std::endl;
-    // std::cout << "  Quality Estimation Algorithm runtime:\t"  << duration_q << " μs" << std::endl;
 }

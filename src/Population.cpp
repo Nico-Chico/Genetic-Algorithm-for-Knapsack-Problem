@@ -126,6 +126,7 @@ void Population::mutate(Individual individual, float mutation_rate) {
     for(int i=0; i<n_items; i++) {
         r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);    // Random float [0.0, 1.0]
         if(r < mutation_rate) {
+            // std::cout << "Gen Mutated" << std::endl;
            if(individual[i]) {
              individual[i] = 0;
            } else individual[i] = 1;            
@@ -135,7 +136,7 @@ void Population::mutate(Individual individual, float mutation_rate) {
 
 int Population::getBestSol() {
     int best_indx = 0;
-    for(int i=0; i<evs.size(); i++){
+    for(unsigned int i=0; i<evs.size(); i++){
         if(evs[i] > evs[best_indx])
             best_indx = i;
     }    
