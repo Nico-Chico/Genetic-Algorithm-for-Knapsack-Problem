@@ -53,6 +53,9 @@ public:
    
     // Mutate genes of the individual pass as parameter with mutation_rate given.
     void mutate(Individual individual, float mutation_rate);
+    
+    // Return index of best solution from populaton.
+ 	int getBestSol();
 };
 
 #endif

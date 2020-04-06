@@ -114,13 +114,31 @@ Individual Population::crossover(const Individual parent1, const Individual pare
 }
 
 void Population::mutate(Individual individual, float mutation_rate) {
-    int muts = mutation_rate * n_items;
-    for(int i=0; i<muts; i++) {
-        int g = rand() % n_items;
-        // std::cout << i << " of" << muts << "mutations | gene: " << g << std::endl;
-        if(individual[g])
-            individual[g] = 0;
-        else individual[g] = 1;
+    // int muts = mutation_rate * n_items;
+    // for(int i=0; i<muts; i++) {
+    //     int g = rand() % n_items;
+    //     // std::cout << i << " of" << muts << "mutations | gene: " << g << std::endl;
+    //     if(individual[g])
+    //         individual[g] = 0;
+    //     else individual[g] = 1;
+    // }
+    float r;
+    for(int i=0; i<n_items; i++) {
+        r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);    // Random float [0.0, 1.0]
+        if(r < mutation_rate) {
+           if(individual[i]) {
+             individual[i] = 0;
+           } else individual[i] = 1;            
+        }
     }
+}
+
+int Population::getBestSol() {
+    int best_indx = 0;
+    for(int i=0; i<evs.size(); i++){
+        if(evs[i] > evs[best_indx])
+            best_indx = i;
+    }    
+    return best_indx;
 }
 

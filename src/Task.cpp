@@ -64,7 +64,7 @@ Individual Task::geneticAlgorithm(int POP_SIZE, int TOUR_SIZE, float CROSSOVER_R
     if(data == NULL) {
         std::cout << "> No data loaded. Please load data and try again." << std::endl;
     } else {   
-        int ITERATIONS_NUMBER = 10;
+        int ITERATIONS_NUMBER = 30;
         Population* P = new Population(N, POP_SIZE);
         std::cout << std::endl;
         Population* newP;
@@ -97,9 +97,10 @@ Individual Task::geneticAlgorithm(int POP_SIZE, int TOUR_SIZE, float CROSSOVER_R
         std::cout << std::endl << "> Final population:  " << std::endl;
         P->evaluate(this);
         P->showPopulation();
-        
-        // solution = P->selectBest();
-        // std::cout << solution << std::endl;
+        int best_index=0;
+        best_index = P->getBestSol();
+        std::cout << std::endl << "Best Solution:" << std::endl;
+        P->showIndividual(best_index);
     }
         return solution; 
 }
