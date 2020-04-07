@@ -65,8 +65,18 @@ Additionally you can indicate an already programmed experiment by passing its na
 To create an experiment:
 1. First create a folder called 'expID' in the 'experiments/'' directory.    (Where 'ID' its a number to identify a experiment)
 2. Then inside the created folder, create a file with the name 'expID' + 'txt'. 
-3. That file must contain 7 lines, where each line corresponds to one of the parameters in this order: 
-*"N_ITEMS, MAX_W, MAX_S, POP_SIZE, TOUR_SIZE, CROSSOVER_RATE, MUTATION_RATE"*
+3. That file must contain 7 lines, where each line corresponds to one of the parameters in this order:
+        
+        01 N_ITEMS
+        02 MAX_W
+        03 MAX_S
+        04 POP_SIZE
+        05 TOUR_SIZE
+        06 CROSSOVER_RATE
+        07 MUTATION_RATE
+        08 DATASET_NAME    (If dataset don't exit in experiments/expID, it will be generated)
+        
+   
 
 *See 'experiments/exp01.txt' to understand it better.*
 
@@ -76,7 +86,7 @@ bin/Lab1 exp01
 ```
 ### Experiments only program:       `Lab1exp.cpp`
 
-The 'Lab1exp' program contains only what is necessary for the experimental mode to work, eliminating the whole menu for easier compilation.
+The 'Lab1exp' program contains only what is necessary for the experimental mode to work, eliminating the whole menu for easier compilation and testing.
 
 Executing experiment 'exp01':
 ```bash

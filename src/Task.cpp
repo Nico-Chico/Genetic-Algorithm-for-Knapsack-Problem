@@ -80,7 +80,6 @@ Individual Task::geneticAlgorithm(int POP_SIZE, int TOUR_SIZE, float CROSSOVER_R
                 Individual p1 = P->tournament(TOUR_SIZE); // Selecting parents
                 Individual p2 = P->tournament(TOUR_SIZE);
                 Individual offspring = P->crossover(p1, p2, CROSSOVER_RATE); // Making the child combining the parents.
-                // Individual offspring = p1; // Making the child combining the parents.
                 P->mutate(offspring, MUTATION_RATE);
                 // std::cout << std::endl << ">> Element " << i <<" of new population:" << std::endl;
                 // std::cout << "  > Parents: " << std::endl;

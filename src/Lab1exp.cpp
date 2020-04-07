@@ -56,11 +56,14 @@ int main(int argc, char** argv) {
             getline(file, line);
             MUTATION_RATE = stof(line);
             
+            getline(file, line);
+            string filename = path + line;
+            // string filename = path + expID + "-dataset.csv";
+            if(!ifstream(filename)) // If dataset file don't exist, I generate it.
+                t.generate(N_ITEMS, MAX_W, MAX_S, filename);                
             // Reading data from datafile specified from input 8º line
-            string filename = path + expID + "-dataset.csv";
-            t.generate(N_ITEMS, MAX_W, MAX_S, filename);
             t.read(filename);
-     
+            
             //  Show loaded parameters   
             std::cout << std::endl;            
             std::cout << "             Genetic Algorithm for Knapsack Problem"  << std::endl;
