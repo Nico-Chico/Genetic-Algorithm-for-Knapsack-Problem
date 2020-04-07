@@ -64,7 +64,7 @@ Additionally you can indicate an already programmed experiment by passing its na
 
 To create an experiment:
 1. First create a folder called 'expID' in the 'experiments/'' directory.    (Where 'ID' its a number to identify a experiment)
-2. Then inside the created folder, create a file with the name 'expID' + 'txt'. 
+2. Then inside the created folder, create a file with the name 'expID.in'. 
 3. That file must contain 7 lines, where each line corresponds to one of the parameters in this order:
         
         01 N_ITEMS
@@ -78,7 +78,7 @@ To create an experiment:
         
    
 
-*See 'experiments/exp01.txt' to understand it better.*
+*See 'experiments/exp01/exp01.in' to understand it better.*
 
 Executing experiment 'exp01':
 ```bash

@@ -165,11 +165,11 @@ int main(int argc, char** argv) {
         
         string expID= argv[1];
         string path = "experiments/"+expID+"/";
-        if(!(ifstream(path + expID +".txt"))) {
+        if(!(ifstream(path + expID +".in"))) {
             std::cout << "Experiment does not exist" << endl;
         } else {
             // Reading parameters from input
-            std::ifstream file(path + expID +".txt");
+            std::ifstream file(path + expID +".in");
             std::string line = "";
             
             getline(file, line);
