@@ -64,14 +64,14 @@ Individual Task::geneticAlgorithm(int POP_SIZE, int TOUR_SIZE, float CROSSOVER_R
     if(data == NULL) {
         std::cout << "> No data loaded. Please load data and try again." << std::endl;
     } else {   
-        int ITERATIONS_NUMBER = 30;
+        int best_val = 0;
         Population* P = new Population(N, POP_SIZE);
         std::cout << std::endl;
         Population* newP;
+        int stucks = 0;
         int its = 0;
-        while(its < ITERATIONS_NUMBER) {
+        while(stucks < 20 && its < 1000) {          
             newP = new Population(N);           // Create a new (next generation) population 
-            P->evaluate(this);                      // Evaluate current population.
             std::cout << std::endl << "> "<< its << " iteration: " << std::endl;
             // std::cout << std::endl << "Population: " << std::endl;
             P-> showPopulation();
@@ -90,19 +90,22 @@ Individual Task::geneticAlgorithm(int POP_SIZE, int TOUR_SIZE, float CROSSOVER_R
                 newP->addIndividual(offspring);     // Add individial to the new population
             }
             P = newP;
-            // if(solution == true)         // I will changue iterator for a condition.
-            //     continue = false;
+            P->evaluate(this);  // Evaluate current population.
+            int new_best_val = P->getEv(P->getBestSol());
+            if(new_best_val == best_val) {
+                stucks++;
+            } else stucks = 0;
+            best_val = P->getEv(P->getBestSol());
             its++;
         }
         std::cout << std::endl << "> Final population:  " << std::endl;
-        P->evaluate(this);
         P->showPopulation();
         int best_index=0;
         best_index = P->getBestSol();
         std::cout << std::endl << "Best Solution:" << std::endl;
         P->showIndividual(best_index);
     }
-        return solution; 
+        return solution;    // Actually I don't return nothing right now
 }
 
 Individual Task::qualityEstimationAlgorithm() {

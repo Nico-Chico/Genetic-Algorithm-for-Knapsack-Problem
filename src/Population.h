@@ -56,6 +56,9 @@ public:
     
     // Return index of best solution from populaton.
  	int getBestSol();
+ 	
+ 	// Return Individual evaluation. (Fitness)
+ 	int getEv(int i) {return evs[i];}
 };
 
 #endif
