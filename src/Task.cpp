@@ -70,12 +70,11 @@ Individual Task::geneticAlgorithm(int POP_SIZE, int TOUR_SIZE, float CROSSOVER_R
         Population* newP;
         int stucks = 0;
         int its = 0;
-        while(stucks < 20 && its < 1000) {          
+        while(stucks < 1000 && its < 100000) {          
             newP = new Population(N);           // Create a new (next generation) population 
-            std::cout << std::endl << "> "<< its << " iteration: " << std::endl;
-            // std::cout << std::endl << "Population: " << std::endl;
-            P-> showPopulation();
-            std::cout << std::endl;
+            // std::cout << std::endl << "> "<< its << " iteration: " << std::endl;
+            // P-> showPopulation();
+            // std::cout << std::endl;
             for(int i=0; i<POP_SIZE; i++) {     // Produce a new population of offsprings of previous population.
                 Individual p1 = P->tournament(TOUR_SIZE); // Selecting parents
                 Individual p2 = P->tournament(TOUR_SIZE);
