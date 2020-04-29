@@ -36,7 +36,7 @@ public:
     void showData();
     
     // Clear data loaded.
-    void clearData() { data = NULL; }
+    void clearData();
     
     // Generate random data and export export to "output_file.csv";
     void generate(int n, int w, int s, std::string output_file);

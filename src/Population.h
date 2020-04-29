@@ -59,6 +59,13 @@ public:
  	
  	// Return Individual evaluation. (Fitness)
  	int getEv(int i) {return evs[i];}
+ 	
+ 	// Clear population and evs
+ 	void clear();
+ 	
+ 	void copy(Population* other);
+ 	
+ 	~Population();
 };
 
 #endif

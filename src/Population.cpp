@@ -9,16 +9,22 @@ Population::Population(int n_items, int size) {
 }
 
 void Population::addIndividual(Individual ind) {
-    pop.push_back(ind);
+	Individual ind_copy = new bool[n_items];
+	for(int i = 0; i < n_items; i++) {		//Copying individual.
+		ind_copy[i] = ind[i];
+	}
+    pop.push_back(ind_copy);
     evs.push_back(-1);
 }
 
 const Population& Population::initPopulation(int n_items, int size) {
-    if(pop.size() > 0) // If there's an existing population, I clear it.
-        pop.clear();
+    if(pop.size() > 0) { // If there's an existing population, I clear it.
+    	pop.clear();
+    	evs.clear();
+    }         
     this->n_items=n_items;
     for(int i=0; i<size; i++)
-        evs.push_back(0);
+        evs.push_back(-1);
     for(int i=0; i<size; i++) {
         Individual p = new bool[n_items];
         for(int i=0; i<n_items; i++) {
@@ -79,26 +85,25 @@ Individual Population::tournament(int tour_size) {
     int rnd;
     std::vector<Individual> tour_parts;
     std::vector<int> tour_evs;
-    Individual best_ind;
+    Individual best_ind = NULL;
     int best_fit = 0;
 
     for(int i=0; i<tour_size; i++){     // Select k individuals to play the tournament.
         rnd = random() % pop.size();
         tour_parts.push_back(pop.at(rnd));
         tour_evs.push_back(evs.at(rnd));
-    }
-    
-    best_ind = tour_parts.at(0);  // If there is no any better Individual, "tournament" will return the first participant.
-
-    for(unsigned int i=0; i<tour_evs.size(); i++) {
         if(tour_evs[i] > best_fit) {
             best_fit = tour_evs[i];
             best_ind = tour_parts[i];
         }
+        
     }
+    if(best_ind == NULL)
+   		best_ind = tour_parts.at(0);  // If there is no any better Individual, "tournament" will return the first participant.
     // std::cout << "- Tournament winner fitness: " << best_fit << std::endl;  // For testing        // For testing only
     return best_ind;
 }
+
 
 Individual Population::crossover(const Individual parent1, const Individual parent2, float crossover_rate) {
     float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);    // Random float [0.0, 1.0]
@@ -141,5 +146,30 @@ int Population::getBestSol() {
             best_indx = i;
     }    
     return best_indx;
+}
+
+void Population::copy(Population* other) {
+	this->clear();
+	this->n_items = other->n_items;
+	this->pop = other->pop;
+	this->evs = other->evs;
+}
+
+void Population::clear() {
+
+// I should clear each element. But copy of population it's not working.
+//	for(long unsigned int i=0; i<pop.size(); i++) {	// Delete each individual. (Individual its a bool*)
+//		delete[] pop[i];
+//    }
+	pop.clear();		// Clear vectors
+	evs.clear();
+}
+
+Population::~Population() {
+	for(long unsigned int i=0; i<pop.size(); i++) {	// Delete each individual. (Individual its a bool*)
+		delete[] pop[i];
+    }
+	pop.clear();		// Clear vectors
+	evs.clear();
 }
 

@@ -7,6 +7,9 @@ Task::Task() {
     data = NULL;
 }
 
+void Task::clearData() {
+	delete[] data;
+}
 
 void Task::showData() {
     if(data == NULL) {
@@ -67,13 +70,17 @@ Individual Task::geneticAlgorithm(int POP_SIZE, int TOUR_SIZE, float CROSSOVER_R
         int best_val = 0;
         Population* P = new Population(N, POP_SIZE);
         std::cout << std::endl;
-        Population* newP;
+        Population* newP = new Population(N); 	// Create empty population.
+        int MAX_STUCKS = 100;
+        int MAX_ITS = 100000;
         int stucks = 0;
         int its = 0;
-        while(stucks < 1000 && its < 100000) {          
-            newP = new Population(N);           // Create a new (next generation) population 
+        while(stucks < MAX_STUCKS && its < MAX_ITS) {
+        	std::cout << "helo" << std::endl;
+        	newP->clear();        	// Clear previous population.  
             std::cout << std::endl << "> "<< its << " iteration: " << std::endl;
             P-> showPopulation();
+        	std::cout << "helo" << std::endl;
             std::cout << std::endl;
             for(int i=0; i<POP_SIZE; i++) {     // Produce a new population of offsprings of previous population.
                 Individual p1 = P->tournament(TOUR_SIZE); // Selecting parents
@@ -88,13 +95,16 @@ Individual Task::geneticAlgorithm(int POP_SIZE, int TOUR_SIZE, float CROSSOVER_R
                 // P->showIndividual(offspring);
                 newP->addIndividual(offspring);     // Add individial to the new population
             }
-            P = newP;
+            P->copy(newP);
             P->evaluate(this);  // Evaluate current population.
             int new_best_val = P->getEv(P->getBestSol());
             if(new_best_val == best_val) {
                 stucks++;
-            } else stucks = 0;
-            best_val = P->getEv(P->getBestSol());
+            } else {
+            	stucks = 0;
+            	best_val = new_best_val;
+            } 
+            
             its++;
         }
         std::cout << std::endl << "> Final population:  " << std::endl;
