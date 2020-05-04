@@ -77,7 +77,8 @@ To make an experiment:
         08 DATASET_NAME			 
         (If dataset don't exit in datasets/, it will be generated)
         (If it exist we read (N_Items, MAX_W, MAX_S) parameters of the dataset file instead of use the defined on the first three lines of this file.)
-       *See 'experiments/exp01.in' to understand it better.*
+*See 'experiments/exp01.in' to understand it better.*
+
 3. Run the experiment:
 
     Running experiment 'exp01' the output will be shown by the terminal:
