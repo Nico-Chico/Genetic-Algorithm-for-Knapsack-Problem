@@ -1,0 +1,10 @@
+01 N_ITEMS			|	60
+02 MAX_W			|	600
+03 MAX_S			|	600
+04 POP_SIZE			|	40
+05 TOUR_SIZE		|	4
+06 CROSSOVER_RATE	|	0.8
+07 MUTATION_RATE	|	0.001
+08 DATASET_NAME   	|	dataset-E.csv			 
+(If dataset don't exit in datasets/, it will be generated)
+(If it exist we read (N_Items, MAX_W, MAX_S) parameters of the dataset file instead of use the defined on the first three lines of this file.)

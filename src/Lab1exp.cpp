@@ -14,8 +14,8 @@ int main(int argc, char** argv) {
 
     // Default Data generation parameters:
     int N_ITEMS = 60;  // 1000 < N < 2000       //if N_items < 80; Individual lenght fit on console witdh. (More comfortable view.)
-    int MAX_W = 200;   // 10000 < W < 20000
-    int MAX_S = 200;   // 10000 < S < 20000
+    int MAX_W = 600;   // 10000 < W < 20000
+    int MAX_S = 600;   // 10000 < S < 20000
     
     // Default GA parameters:
     int POP_SIZE = 50;              // Size of the population that algorithm will use.
@@ -27,12 +27,11 @@ int main(int argc, char** argv) {
         std::cout << "Exp mode. Loading experiment: '" << argv[1]  <<"'"<< endl;
         
         string expID= argv[1];
-        string path = "experiments/"+expID+"/";
-        if(!(ifstream(path + expID +".in"))) {
+        if(!(ifstream(expID))) {
             std::cout << "Experiment does not exist" << endl;
         } else {
             // Reading parameters from input
-            std::ifstream file(path + expID +".in");
+            std::ifstream file(expID);
             std::string line = "";
             
             getline(file, line);
@@ -57,8 +56,7 @@ int main(int argc, char** argv) {
             MUTATION_RATE = stof(line);
             
             getline(file, line);
-            string filename = path + line;
-            // string filename = path + expID + "-dataset.csv";
+            string filename = "datasets"+line;
             if(!ifstream(filename)) // If dataset file don't exist, I generate it.
                 t.generate(N_ITEMS, MAX_W, MAX_S, filename);                
             // Reading data from datafile specified from input 8º line

@@ -27,6 +27,7 @@ class Task {
 
 public:
     Task();
+    ~Task() {delete[] data;}
     int getN() const { return N; }
     int getW() const { return W; }
     int getS() const { return S; }
