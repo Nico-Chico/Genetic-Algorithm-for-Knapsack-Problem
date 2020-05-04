@@ -21,7 +21,7 @@ int main(int argc, char** argv) {
     int POP_SIZE = 50;              // Size of the population that algorithm will use.
     int TOUR_SIZE = 20;              // nºindividuals of the population thats play one tournament. It used for Tournament Selection method. TOUR_SIZE must be <= POP_SIZE 
     float CROSSOVER_RATE = 0.7;      // Between [0, 1]; Probability of make a crossover takes effect.
-    float MUTATION_RATE = 4/50;       // n_items * MUTATION_RATE = nº of genes that mutes from one individual.
+    float MUTATION_RATE = 0.001;       // n_items * MUTATION_RATE = nº of genes that mutes from one individual.
     
      if(argc == 1) { //MENU MODE
         bool stop = false;
@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
             std::cout << "  3. 👀\t| Show dataset in use" << std::endl;
             std::cout << "  4. ⚙️\t| Set Algorithm parameters" << std::endl;
             std::cout << "  5. 🧬\t| Use 'Genetic Algorithm'" << std::endl;
-            std::cout << "  0. 🡄\t| Exit" << std::endl;
+            std::cout << "  0. ⬅\t| Exit" << std::endl;
             
             std::cout << "\n\n > ";
             std::cin >> selection;
