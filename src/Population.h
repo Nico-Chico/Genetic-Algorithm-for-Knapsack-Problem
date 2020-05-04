@@ -22,6 +22,8 @@ class Population {
 public:
     Population(int n_items);
     Population(int n_items, int size);
+    ~Population();
+    
     const std::vector<Individual>& getPopulation() const {return pop;}    ///Add const?
     const std::vector<int>& getEvaluations() const {return evs;}          ///Add const?
     int getNitems() const {return n_items;}
@@ -31,7 +33,7 @@ public:
     void addIndividual(Individual ind);
     
     // Initialice the population randomly
-    const Population& initPopulation(int n_items, int size); // Nº of items, Size of population.
+    void initPopulation(int n_items, int size); // Nº of items, Size of population.
     
     // Show Individual on the position 'n';
     void showIndividual(int n);
@@ -60,12 +62,13 @@ public:
  	// Return Individual evaluation. (Fitness)
  	int getEv(int i) {return evs[i];}
  	
- 	// Clear population and evs
+ 	// Copy content from other populaton.
+ 	void copy(const Population &other);
+ 	
+ 	// Clear the population
  	void clear();
  	
- 	void copy(Population* other);
- 	
- 	~Population();
+ 	//
 };
 
 #endif

@@ -10,21 +10,18 @@ Population::Population(int n_items, int size) {
 
 void Population::addIndividual(Individual ind) {
 	Individual ind_copy = new bool[n_items];
-	for(int i = 0; i < n_items; i++) {		//Copying individual.
+	for(int i=0; i<n_items; i++) {		//Copying individual.
 		ind_copy[i] = ind[i];
 	}
     pop.push_back(ind_copy);
     evs.push_back(-1);
 }
 
-const Population& Population::initPopulation(int n_items, int size) {
+void Population::initPopulation(int n_items, int size) {
     if(pop.size() > 0) { // If there's an existing population, I clear it.
-    	pop.clear();
-    	evs.clear();
+    	clear();
     }         
     this->n_items=n_items;
-    for(int i=0; i<size; i++)
-        evs.push_back(-1);
     for(int i=0; i<size; i++) {
         Individual p = new bool[n_items];
         for(int i=0; i<n_items; i++) {
@@ -33,8 +30,8 @@ const Population& Population::initPopulation(int n_items, int size) {
             else p[i] = false;      // of weight and size and therefore there is too many 'Individuals' with fitness 0;
         }
         pop.push_back(p);
+        evs.push_back(-1);
     }
-    return *this;
 }
 
 void Population::showIndividual(int n) {
@@ -148,28 +145,26 @@ int Population::getBestSol() {
     return best_indx;
 }
 
-void Population::copy(Population* other) {
-	this->clear();
-	this->n_items = other->n_items;
-	this->pop = other->pop;
-	this->evs = other->evs;
+void Population::copy(const Population &other) {
+		this->clear();
+		this->n_items = other.n_items;
+		for(Individual ind : other.pop) {
+			Individual new_ind = new bool[n_items];
+			for(int i=0; i<n_items; i++)
+				new_ind[i] = ind[i];
+			pop.push_back(new_ind);
+		}
+		this->evs = other.evs;
 }
 
 void Population::clear() {
-
-// I should clear each element. But copy of population it's not working.
-//	for(long unsigned int i=0; i<pop.size(); i++) {	// Delete each individual. (Individual its a bool*)
-//		delete[] pop[i];
-//    }
+	for(Individual ind : pop)
+		delete [] ind;
 	pop.clear();		// Clear vectors
 	evs.clear();
 }
 
 Population::~Population() {
-	for(long unsigned int i=0; i<pop.size(); i++) {	// Delete each individual. (Individual its a bool*)
-		delete[] pop[i];
-    }
-	pop.clear();		// Clear vectors
-	evs.clear();
+	clear();
 }
 

@@ -7,9 +7,6 @@ Task::Task() {
     data = NULL;
 }
 
-void Task::clearData() {
-	delete[] data;
-}
 
 void Task::showData() {
     if(data == NULL) {
@@ -62,57 +59,109 @@ void Task::read(std::string fileName) {
     }
 }
 
+//Individual Task::geneticAlgorithm(int POP_SIZE, int TOUR_SIZE, float CROSSOVER_RATE, float MUTATION_RATE) {
+//    Individual solution = NULL;
+//    if(data == NULL) {
+//        std::cout << "> No data loaded. Please load data and try again." << std::endl;
+//    } else {   
+//        int best_val = 0;
+//        Population* P = new Population(N, POP_SIZE);
+//        std::cout << std::endl;
+//        Population* newP = new Population(N);
+//        int MAX_STUCKS = 50;
+//        int MAX_ITS = 30000;
+//        int stucks = 0;
+//        int its = 0;
+//        while(stucks < MAX_STUCKS && its < MAX_ITS) {     
+//            std::cout << "AAAAA " << std::endl;     
+//            newP->clear(); // Clear new population 
+//            std::cout << "BBBB " << std::endl;
+//            std::cout << std::endl << "> "<< its << " iteration: " << std::endl;
+//            P-> showPopulation();
+//            std::cout << "CCCC " << std::endl;
+//            std::cout << std::endl;
+//            for(int i=0; i<POP_SIZE; i++) {     // Produce a new population of offsprings of previous population.
+//                Individual p1 = P->tournament(TOUR_SIZE); // Selecting parents
+//                Individual p2 = P->tournament(TOUR_SIZE);
+//                Individual offspring = P->crossover(p1, p2, CROSSOVER_RATE); // Making the child combining the parents.
+//                P->mutate(offspring, MUTATION_RATE);
+//                // std::cout << std::endl << ">> Element " << i <<" of new population:" << std::endl;
+//                // std::cout << "  > Parents: " << std::endl;
+//                // P->showIndividual(p1);
+//                // P->showIndividual(p2);
+//                // std::cout << "  > New Offspring: " << std::endl;
+//                // P->showIndividual(offspring);
+//                newP->addIndividual(offspring);     // Add individial to the new population
+//            }
+//            P->copy(*newP);
+//            P->evaluate(this);  // Evaluate current population.
+//            int new_best_val = P->getEv(P->getBestSol());
+//            if(new_best_val == best_val) {
+//                stucks++;
+//            } else stucks = 0;
+//            best_val = new_best_val;
+//            its++;
+//        }
+//        std::cout << std::endl << "> Final population:  " << std::endl;
+//        P->showPopulation();
+//        int best_index=0;
+//        best_index = P->getBestSol();
+//        std::cout << std::endl << "Best Solution:" << std::endl;
+//        P->showIndividual(best_index);
+////        delete[] P;
+////        delete[] newP;
+//    }
+//        return solution;    // Actually I don't return nothing right now
+//}
+
 Individual Task::geneticAlgorithm(int POP_SIZE, int TOUR_SIZE, float CROSSOVER_RATE, float MUTATION_RATE) {
     Individual solution = NULL;
     if(data == NULL) {
         std::cout << "> No data loaded. Please load data and try again." << std::endl;
     } else {   
         int best_val = 0;
-        Population* P = new Population(N, POP_SIZE);
+        Population P(N, POP_SIZE);
+        Population newP(N);
         std::cout << std::endl;
-        Population* newP = new Population(N); 	// Create empty population.
-        int MAX_STUCKS = 100;
-        int MAX_ITS = 100000;
+        int MAX_STUCKS = 50;
+        int MAX_ITS = 30000;
         int stucks = 0;
         int its = 0;
-        while(stucks < MAX_STUCKS && its < MAX_ITS) {
-        	std::cout << "helo" << std::endl;
-        	newP->clear();        	// Clear previous population.  
+        while(stucks < MAX_STUCKS && its < MAX_ITS) {     
+            newP.clear(); // Clear new population 
             std::cout << std::endl << "> "<< its << " iteration: " << std::endl;
-            P-> showPopulation();
-        	std::cout << "helo" << std::endl;
+            P.showPopulation();
             std::cout << std::endl;
             for(int i=0; i<POP_SIZE; i++) {     // Produce a new population of offsprings of previous population.
-                Individual p1 = P->tournament(TOUR_SIZE); // Selecting parents
-                Individual p2 = P->tournament(TOUR_SIZE);
-                Individual offspring = P->crossover(p1, p2, CROSSOVER_RATE); // Making the child combining the parents.
-                P->mutate(offspring, MUTATION_RATE);
+                Individual p1 = P.tournament(TOUR_SIZE); // Selecting parents
+                Individual p2 = P.tournament(TOUR_SIZE);
+                Individual offspring = P.crossover(p1, p2, CROSSOVER_RATE); // Making the child combining the parents.
+                P.mutate(offspring, MUTATION_RATE);
                 // std::cout << std::endl << ">> Element " << i <<" of new population:" << std::endl;
                 // std::cout << "  > Parents: " << std::endl;
                 // P->showIndividual(p1);
                 // P->showIndividual(p2);
                 // std::cout << "  > New Offspring: " << std::endl;
                 // P->showIndividual(offspring);
-                newP->addIndividual(offspring);     // Add individial to the new population
+                newP.addIndividual(offspring);     // Add individial to the new population
             }
-            P->copy(newP);
-            P->evaluate(this);  // Evaluate current population.
-            int new_best_val = P->getEv(P->getBestSol());
+            P.copy(newP);
+            P.evaluate(this);  // Evaluate current population.
+            int new_best_val = P.getEv(P.getBestSol());
             if(new_best_val == best_val) {
                 stucks++;
-            } else {
-            	stucks = 0;
-            	best_val = new_best_val;
-            } 
-            
+            } else stucks = 0;
+            best_val = new_best_val;
             its++;
         }
         std::cout << std::endl << "> Final population:  " << std::endl;
-        P->showPopulation();
+        P.showPopulation();
         int best_index=0;
-        best_index = P->getBestSol();
+        best_index = P.getBestSol();
         std::cout << std::endl << "Best Solution:" << std::endl;
-        P->showIndividual(best_index);
+        P.showIndividual(best_index);
+//        delete[] P;
+//        delete[] newP;
     }
         return solution;    // Actually I don't return nothing right now
 }
