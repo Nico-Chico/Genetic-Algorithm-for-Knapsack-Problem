@@ -55,49 +55,46 @@ Shows a Main Menu that controls the program from the top.
 
 ![menu img](https://gitlab.com/Nico_Chico/Genetic-Algorithm-for-Knapsack-Problem/-/raw/master/others/menu_screenshot_cut.png)
 
-Menu is totally working on most Linux Terminal.
+Menu is totally working on Linux Terminals.
 On Windows Terminal unicode characters wont be shown properly. (CMD does not support yet.) And to compile it on Windows you will need to change `system("clear")` for `system("cls")` function.  Everything else should work exactly the same.
-From here you can change the parameters that the data generation or the genetic algorithm will use. can also change this parameters manualy on the main.cpp
+Using that menu you can change every parameters that the data generation or the genetic algorithm will use.
 
 ## Experiment Mode
-Additionally you can indicate an already programmed experiment by passing its name by parameter.
+The 'Lab1exp' binary contains only what is necessary for the experimental mode to work, eliminating the whole menu for easier compilation and testing.
+You can use that binary to indicate an already programmed experiment by passing its name by parameter.
 
-To create an experiment:
-1. First create a folder called 'expID' in the 'experiments/'' directory.    (Where 'ID' its a number to identify a experiment)
-2. Then inside the created folder, create a file with the name 'expID.in'. 
-3. That file must contain 7 lines, where each line corresponds to one of the parameters in this order:
+To make an experiment:
+1. First create a file with the desired name in the 'experiments/' directory.
+2. That file must contain 7 lines, where each line corresponds to one of the parameters in this order:
         
         01 N_ITEMS
-        02 MAX_W
+        02 MAX_W		
         03 MAX_S
-        04 POP_SIZE
+        04 POP_SIZE	
         05 TOUR_SIZE
         06 CROSSOVER_RATE
         07 MUTATION_RATE
-        08 DATASET_NAME    (If dataset don't exit in experiments/expID, it will be generated)
-        
-   
+        08 DATASET_NAME			 
+        (If dataset don't exit in datasets/, it will be generated)
+        (If it exist we read (N_Items, MAX_W, MAX_S) parameters of the dataset file instead of use the defined on the first three lines of this file.)
+       *See 'experiments/exp01.in' to understand it better.*
+3. Run the experiment:
 
-*See 'experiments/exp01/exp01.in' to understand it better.*
+    Running experiment 'exp01' the output will be shown by the terminal:
+    ```bash
+    bin/Lab1exp experiments/exp01.in
+    ```
+    
+    Executing experiment 'exp01' and saving the output as a file:
+    ```bash
+    bin/Lab1exp experiments/exp01.in > experiments/exp01.out
+    ```
 
-Executing experiment 'exp01':
-```bash
-bin/Lab1 exp01
-```
-### Experiments only program:       `Lab1exp.cpp`
-
-The 'Lab1exp' program contains only what is necessary for the experimental mode to work, eliminating the whole menu for easier compilation and testing.
-
-Executing experiment 'exp01':
-```bash
-bin/Lab1exp exp01
-```
-
-*More information is detailed in the source code comments.*
+*Much more information on how the code works is given in comments.*
 
 ## Some Documentation notes:
 
-*Please read first `Lab1.pdf'*
+*Please read first `Lab1.pdf' to understand the project*
 
 ### 1. Criteria Aclaration on Implementation of the task generator
 
