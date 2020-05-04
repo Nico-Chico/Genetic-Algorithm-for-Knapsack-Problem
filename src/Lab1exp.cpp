@@ -56,7 +56,7 @@ int main(int argc, char** argv) {
             MUTATION_RATE = stof(line);
             
             getline(file, line);
-            string filename = "datasets"+line;
+            string filename = "datasets/"+line;
             if(!ifstream(filename)) // If dataset file don't exist, I generate it.
                 t.generate(N_ITEMS, MAX_W, MAX_S, filename);                
             // Reading data from datafile specified from input 8º line
