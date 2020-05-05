@@ -115,19 +115,292 @@ Seeing this we realize that the second criteria is a property that will be met i
 
 Also, in case there is any doubt, I made tests, checking the value of these sums. The result was what we expected. About 5w.
 
-<!--
-## Testing our Genetic Algorithm 👨‍🔬️ ⚙️
+
+## Analysis 🔬️
+
+Below are the various conclusions showing the different experiments that support it.
+Each experiment has been measured 4 times. The results is the average of them.
+
+These experiments are realized over the dataset-EXP_Little where N = 100, W = 1000 and	S = 1000;
+They can look like small numbers, s it said on "Lab1.pdf" it would be more appropriate to test with N = 1000;	W = 10000;	S = 10000; but there reason for use these number is the size of the experiments outputs files.  
+Since this output shows the whole process of the algorithm, each iteration and each individual. If the dataset is too big these outputs will be too. So after checking that the results of the analysis are kept at a larger scale I have decided to explain the analysis on a simpler dataset.
 
 
-### Analysis of tests 🔩
+```
+exp00: 
+	Dataset: dataset-EXP_Little		N = 100;	W = 1000;	S = 1000;
+	POP_SIZE: 40	
+	TOUR_SIZE: 10
+	CROSSOVER_RATE: 0.7
+	MUTATION_RATE:	0.001
+
+ ==== Solutions: ====
+	GA Average best solution:	1727.75	
+	QEA best solution:		 2408
+ ==== Times: ====
+  Genetic Algorithm Average runtime:	57725.75 μs	(83 its)
+  Quality Estimation Algorithm runtime:	41 μs
+
+exp01: 
+	Dataset: dataset-EXP_Little		N = 100;	W = 1000;	S = 1000;
+	POP_SIZE: 60	
+	TOUR_SIZE: 10
+	CROSSOVER_RATE: 0.7
+	MUTATION_RATE:	0.001
+
+ ==== Solutions: ====
+	GA Average best solution:	1820.75
+	QEA best solution:		 2408
+ ==== Times: ====
+  Genetic Algorithm Average runtime:	94138.75 μs	(87.35 its)
+  Quality Estimation Algorithm runtime:	41 μs
 
 
-## Conclusiones 
+exp02: 
+	Dataset: dataset-EXP_Little		N = 100;	W = 1000;	S = 1000;
+	POP_SIZE: 100	
+	TOUR_SIZE: 10
+	CROSSOVER_RATE: 0.7
+	MUTATION_RATE:	0.001
 
-Si resulta que en una iteración se selecciona el mismo padre demasiado para la nueva publación. (Ya sea por un tamaño de población escaso o por un tamaño de torneo muy grande) la descendencia(next population) se estanca y sus individuos son demasiado parecidos.
+ ==== Solutions: ====
+	GA Average best solution:	1977.75
+	QEA best solution:		 2408
+ ==== Times: ====
+  Genetic Algorithm Average runtime:	198051.75 μs	(138 its)
+  Quality Estimation Algorithm runtime:	41 μs
+  
+exp03: 
+	Dataset: dataset-EXP_Little		N = 100;	W = 1000;	S = 1000;
+	POP_SIZE: 300
+	TOUR_SIZE: 10
+	CROSSOVER_RATE: 0.7
+	MUTATION_RATE:	0.001
 
-<
+ ==== Solutions: ====
+	GA Average best solution:	2216
+	QEA best solution:		 2408
+ ==== Times: ====
+  Genetic Algorithm Average runtime:	350051.25 μs	(91 its)
+  Quality Estimation Algorithm runtime:	41 μs
 
--->
+
+exp04: 
+	Dataset: dataset-EXP_Little		N = 100;	W = 1000;	S = 1000;
+	POP_SIZE: 1000
+	TOUR_SIZE: 10
+	CROSSOVER_RATE: 0.7
+	MUTATION_RATE:	0.001
+
+ ==== Solutions: ====
+	GA Average best solution:	2451
+	QEA best solution:		 2408
+ ==== Times: ====
+  Genetic Algorithm Average runtime:	1515856.5 μs 	(115 its)
+  Quality Estimation Algorithm runtime:	41 μs
+
+exp05: 
+	Dataset: dataset-EXP_Little		N = 100;	W = 1000;	S = 1000;
+	POP_SIZE: 600
+	TOUR_SIZE: 10
+	CROSSOVER_RATE: 0.7
+	MUTATION_RATE:	0.001
+
+ ==== Solutions: ====
+	GA Average best solution:	2360
+	QEA best solution:		 2408
+ ==== Times: ====
+  Genetic Algorithm Average runtime:	1228033.5 μs 	(92 its)
+  Quality Estimation Algorithm runtime:	41 μs
+
+```
+### Analysis of the impact of population size
+Comparing the experiments from 0 to 5
+where the population size takes the values of 40, 60, 100, 300, 1000 and 600, the rest of parameters are fixed, we can see that The larger the population, the better the result and the more time is required for counting.
+It seems that the number of AG iterations is not affected by the size of the population.
+The optimal point of population size will depend on the specific problem. In this case I think a good value would be between 600 and 1000.
+As we see from 600 to 1000 is not very significant. Although it is true that with a population of 1000 elements, it is possible to have a better solution than even the estimation algorithm.
+The larger the dimension of the problem, the larger the population must be in order to be optimal, as we will need to explore a larger space.
+
+---
+
+```
+exp06: 
+	Dataset: dataset-EXP_Little		N = 100;	W = 1000;	S = 1000;
+	POP_SIZE: 800
+	TOUR_SIZE: 40
+	CROSSOVER_RATE: 0.7
+	MUTATION_RATE:	0.001
+
+ ==== Solutions: ====
+	GA Average best solution:	2399
+	QEA best solution:		 2408
+ ==== Times: ====
+  Genetic Algorithm Average runtime:	1339431 μs 	(101 its)
+  Quality Estimation Algorithm runtime:	41 μs
+
+exp07: 
+	Dataset: dataset-EXP_Little		N = 100;	W = 1000;	S = 1000;
+	POP_SIZE: 800
+	TOUR_SIZE: 400
+	CROSSOVER_RATE: 0.7
+	MUTATION_RATE:	0.001
+
+ ==== Solutions: ====
+	GA Average best solution:	2385
+	QEA best solution:		 2408
+ ==== Times: ====
+  Genetic Algorithm Average runtime:	6035886.25 μs 	(120 its)
+  Quality Estimation Algorithm runtime:	41 μs
+  
+```
+
+### Analysis of the impact of tournament size.
+We have to be careful with this parameter as a very small value will not often select one of the best values in the population. And a value that is too high will always select the same element, so the individuals in the population will be very similar to each other. This causes the algorithm to stagnate and must do more iterations than necessary. In addition to greatly increasing the computation time.
+Based on the experiments performed. I think a good value for the size of the tournament would be 10% of the total population.
+
+---
+```
+exp08: 
+	Dataset: dataset-EXP_Little		N = 100;	W = 1000;	S = 1000;
+	POP_SIZE: 800
+	TOUR_SIZE: 80
+	CROSSOVER_RATE: 0
+	MUTATION_RATE:	0.001
+
+ ==== Solutions: ====
+	GA Average best solution:	2415
+	QEA best solution:		 2408
+ ==== Times: ====
+  Genetic Algorithm Average runtime:	3993516.25 μs 	(180 its)
+  Quality Estimation Algorithm runtime:	41 μs
+  
+
+exp09: 
+	Dataset: dataset-EXP_Little		N = 100;	W = 1000;	S = 1000;
+	POP_SIZE: 800
+	TOUR_SIZE: 80
+	CROSSOVER_RATE: 0.5
+	MUTATION_RATE:	0.001
+
+ ==== Solutions: ====
+	GA Average best solution:	2385
+	QEA best solution:		 2408
+ ==== Times: ====
+  Genetic Algorithm Average runtime:	10095108.25 μs 	(180 its)
+  Quality Estimation Algorithm runtime:	41 μs
+  
+ exp10: 
+	Dataset: dataset-EXP_Little		N = 100;	W = 1000;	S = 1000;
+	POP_SIZE: 800
+	TOUR_SIZE: 80
+	CROSSOVER_RATE: 0
+	MUTATION_RATE:	0
+
+ ==== Solutions: ====
+	GA Average best solution:	1436
+	QEA best solution:		 2408
+ ==== Times: ====
+  Genetic Algorithm Average runtime:	883555 μs 	( 50 its)
+  Quality Estimation Algorithm runtime:	41 μs
+  
+```
+### Analysis of the impact of the crossover probability:
+As a result we see that if the population is large enough, and there is a small mutation ratio the crossover operator is not totally necessary, but it helps to improve the solution without doing so many iterations. Let's say it speeds up the algorithm in the right way. 
+On the other hand, if both ratios are close to 0, the algorithm will quickly stagnate doing only 50 iterations, and the given solution will be far from being good.
+It's good for us sometimes to keep an individual in the population without mixing it up. That's why we'll choose a crossover ratio close to 1 but not reaching it.
+Therefore a good ratio for the crossover would be 0.7 or 0.8
+
+---
+
+```
+ exp11: 
+	Dataset: dataset-EXP_Little		N = 100;	W = 1000;	S = 1000;
+	POP_SIZE: 800
+	TOUR_SIZE: 80
+	CROSSOVER_RATE: 0.7
+	MUTATION_RATE:	0
+
+ ==== Solutions: ====
+	GA Average best solution:	1436
+	QEA best solution:		 2408
+ ==== Times: ====
+  Genetic Algorithm Average runtime:	1274321 μs 	( 54 its)
+  Quality Estimation Algorithm runtime:	41 μs
+  
+exp12: 
+	Dataset: dataset-EXP_Little		N = 100;	W = 1000;	S = 1000;
+	POP_SIZE: 800
+	TOUR_SIZE: 80
+	CROSSOVER_RATE: 0.7
+	MUTATION_RATE:	0.8
+
+ ==== Solutions: ====
+	GA Average best solution:	0
+	QEA best solution:		 2408
+ ==== Times: ====
+  Genetic Algorithm Average runtime:	1134608 μs 	( 54 its)
+  Quality Estimation Algorithm runtime:	41 μs
+
+
+exp13: 
+	Dataset: dataset-EXP_Little		N = 100;	W = 1000;	S = 1000;
+	POP_SIZE: 800
+	TOUR_SIZE: 80
+	CROSSOVER_RATE: 0.7
+	MUTATION_RATE:	0.2
+
+ ==== Solutions: ====
+	GA Average best solution:	0
+	QEA best solution:		 2408
+ ==== Times: ====
+  Genetic Algorithm Average runtime:	1134608 μs 	( 54 its)
+  Quality Estimation Algorithm runtime:	41 μs
+
+exp14:
+	Dataset: dataset-EXP_Little		N = 100;	W = 1000;	S = 1000;
+	POP_SIZE: 800
+	TOUR_SIZE: 80
+	CROSSOVER_RATE: 0.7
+	MUTATION_RATE:	0.01
+
+ ==== Solutions: ====
+	GA Average best solution:	2481
+	QEA best solution:		 1942
+ ==== Times: ====
+  Genetic Algorithm Average runtime:	3700583 μs 	( 209 its)
+  Quality Estimation Algorithm runtime:	41 μs
+  
+exp15:
+	Dataset: dataset-EXP_Little		N = 100;	W = 1000;	S = 1000;
+	POP_SIZE: 800
+	TOUR_SIZE: 80
+	CROSSOVER_RATE: 0.7
+	MUTATION_RATE:	0.001
+
+ ==== Solutions: ====
+	GA Average best solution: 2502
+	QEA best solution:		 1942
+ ==== Times: ====
+  Genetic Algorithm Average runtime:	1691294 μs 	( 54 its)
+  Quality Estimation Algorithm runtime:	41 μs
+
+```
+
+### Analysis of the impact of the mutation probability
+A mutation rate that is too high will cause many individuals with a 0 value to fill the population and in the end we will not get a solution.
+A 0 mutation rate will cause our population to be filled with very similar individuals
+so do not evolve. Our solution will not be good.
+So we have to select very low mutations rate, between 0.01 and 0.001 can be a good rate.
+Between this values, higher the mutation rate, higher the computation time and iterations and higher the posibility to get very good solutions.
+
+---
+
+### Comparison of the best solution with any of the non-evolutionary methods.
+I made an algorithm that characterized each item by a quality calculated by value/(weight+size). That algorithm will takes the items in order of quality.
+We can easily compare the efficiency of this algorithm with the GA.
+We can see that in the scale we are working this quality algorithm have good results faster than GA. But we can imagine that on a much larger scale this algorithm would cease to be computable, since it uses the brute force to calculate the qualities and look for the best in each selection. That is, from one point on, the GA should be a better option.
+The result of this algortihm solution in our experiments dataset is showned in each the experiment to easy comparation.
+
 ---
  Project by: **Nicolás Magro Cruzado** | [GitLab](https://gitlab.com/Nico_Chico) ⌨️
