@@ -97,7 +97,7 @@ To make an experiment:
 
 *Please read first `Lab1.pdf' to understand the project*
 
-### 1. Criteria Aclaration on Implementation of the task generator
+### 1. Criteria Clarification on Implementation of the task generator
 
 On Knapsack problem `function generate(n, w, s, output_file)`.
 **Lab1.pdf sentence** that the set of generated items **meets the following criteria:**
